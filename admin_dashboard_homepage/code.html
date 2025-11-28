@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Scriptloaded - Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@400,0..1,200..700" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": {
+                            DEFAULT: "#1A73E8",
+                            "light": "#4285F4"
+                        },
+                        "background-light": "#f0f2f5",
+                        "background-dark": "#0d1117",
+                        "accent-cyan": "#00FFFF",
+                        "accent-magenta": "#FF00FF",
+                        "panel-light": "rgba(255, 255, 255, 0.5)",
+                        "panel-dark": "rgba(30, 41, 59, 0.5)",
+                        "border-light": "rgba(255, 255, 255, 0.8)",
+                        "border-dark": "rgba(51, 65, 85, 0.5)",
+                        "text-light-primary": "#1f2937",
+                        "text-light-secondary": "#6b7280",
+                        "text-dark-primary": "#e5e7eb",
+                        "text-dark-secondary": "#9ca3af"
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.75rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                        'soft-dark': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                    },
+                    backdropBlur: {
+                        'xl': '24px',
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-image:
+                radial-gradient(at 20% 20%, hsla(212, 90%, 50%, 0.1) 0px, transparent 50%),
+                radial-gradient(at 80% 0%, hsla(288, 80%, 50%, 0.1) 0px, transparent 50%),
+                radial-gradient(at 80% 80%, hsla(180, 90%, 60%, 0.1) 0px, transparent 50%);
+        }
+        .glassmorphism {
+            background-color: var(--panel-bg);
+            backdrop-filter: blur(24px);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+        }
+        .light .glassmorphism {
+            --panel-bg: theme('colors.panel-light');
+            --border-color: theme('colors.border-light');
+        }
+        .dark .glassmorphism {
+            --panel-bg: theme('colors.panel-dark');
+            --border-color: theme('colors.border-dark');
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-light-primary dark:text-dark-primary">
+<div class="relative flex h-auto min-h-screen w-full flex-col">
+<div class="flex h-full min-h-screen">
+<!-- SideNavBar -->
+<aside class="flex w-64 flex-col gap-8 p-4 border-r border-border-light dark:border-border-dark glassmorphism sticky top-0 h-screen">
+<div class="flex items-center gap-2 px-3">
+<svg class="h-8 w-8 text-primary" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z" fill="currentColor" fill-rule="evenodd"></path></svg>
+<h2 class="text-xl font-bold tracking-[-0.015em]">Scriptloaded</h2>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 rounded-lg bg-primary/20 dark:bg-primary/30 px-3 py-2 text-primary font-medium" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="text-sm">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-light-secondary dark:text-dark-secondary hover:bg-black/5 dark:hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined">widgets</span>
+<p class="text-sm font-medium">Products</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-light-secondary dark:text-dark-secondary hover:bg-black/5 dark:hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<p class="text-sm font-medium">Users</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-light-secondary dark:text-dark-secondary hover:bg-black/5 dark:hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<p class="text-sm font-medium">Sales</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-light-secondary dark:text-dark-secondary hover:bg-black/5 dark:hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm font-medium">Settings</p>
+</a>
+</nav>
+<div class="mt-auto">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Admin avatar placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDxUTPXd_eg3vwKf982szq5jX7PfLVArFh_i-MPmUB3IEAAf4XjtXbpmwYF7KFjziiiulNfQSfO3sfqCQPIfqPtarm1ZFzEC-oi6JWDDh4QZF_t490gYBpC3oLsez6pzS01ld8kqPfXPr5wK-WM79Zr-_FZSZqZQcYcGzaSx7LWkAmajQNQYnpylqVLOAnROcQ2bwhr9GKbqwFNDxenBwfAnqXKAOir2dRxMyk-r0Is01C21zH5yc0zTf-Ce9s1_tNHglsrVAdwAvvb");'></div>
+<div class="flex flex-col">
+<h1 class="font-medium text-sm">Admin Name</h1>
+<p class="text-text-light-secondary dark:text-dark-secondary text-xs">Administrator</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-10 flex h-20 items-center justify-between gap-8 whitespace-nowrap px-8 py-4 glassmorphism">
+<label class="relative flex-1 max-w-xl">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-light-secondary dark:text-dark-secondary">search</span>
+<input class="form-input flex w-full h-12 min-w-0 flex-1 resize-none overflow-hidden rounded-lg bg-black/5 dark:bg-white/5 pl-12 text-base font-normal leading-normal placeholder:text-text-light-secondary dark:placeholder:text-dark-secondary focus:outline-none focus:ring-2 focus:ring-primary border-none" placeholder="Search products, users..." value=""/>
+</label>
+<div class="flex items-center gap-4">
+<button class="flex size-10 cursor-pointer items-center justify-center rounded-full bg-black/5 dark:bg-white/5 text-text-light-secondary dark:text-dark-secondary">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<button class="relative flex size-10 cursor-pointer items-center justify-center rounded-full bg-black/5 dark:bg-white/5 text-text-light-secondary dark:text-dark-secondary">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-cyan opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-accent-cyan"></span>
+</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12" data-alt="Admin avatar placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAG4Ba7KtqHHov9vll9R8JEWGDPWR_L0vNGQcMpK1nBdasGUaPmr-dQzQINTbZfej0xxTr06JamEnO0pW-8ubtJ0UpzGeJaR5mMAsJTreNH8ti3n4cl7iHf1VbH9JeryertIDt0UNAmqOfwisXBgsQfVK8LaB2UvXbsk7Spto87H1y8F6jYoCIdsfJwj1noHjGV769XBImHDQEIRupc0KmbCvSQbLWDTSJTdqY8kMLlP_S9RzCBPWuZj_uk4wFgjTcwruyGBIB5_4RP");'></div>
+</div>
+</header>
+<div class="p-8 space-y-8">
+<!-- Page Heading -->
+<div>
+<h1 class="text-4xl font-bold leading-tight tracking-tight">Admin Dashboard</h1>
+<p class="text-text-light-secondary dark:text-dark-secondary mt-1">Welcome back, here's an overview of your marketplace.</p>
+</div>
+<!-- Stats -->
+<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+<div class="flex flex-col gap-2 rounded-xl p-6 glassmorphism">
+<p class="text-base font-medium text-text-light-secondary dark:text-dark-secondary">Total Users</p>
+<p class="tracking-tight text-3xl font-bold">12,450</p>
+<p class="text-green-500 text-sm font-medium">+5.4%</p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 glassmorphism">
+<p class="text-base font-medium text-text-light-secondary dark:text-dark-secondary">Total Sellers</p>
+<p class="tracking-tight text-3xl font-bold">1,200</p>
+<p class="text-green-500 text-sm font-medium">+2.1%</p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 glassmorphism">
+<p class="text-base font-medium text-text-light-secondary dark:text-dark-secondary">Total Sales</p>
+<p class="tracking-tight text-3xl font-bold">$250,600</p>
+<p class="text-green-500 text-sm font-medium">+12.8%</p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 glassmorphism">
+<p class="text-base font-medium text-text-light-secondary dark:text-dark-secondary">Pending Approvals</p>
+<p class="tracking-tight text-3xl font-bold">45</p>
+<p class="text-yellow-500 text-sm font-medium">+3 since yesterday</p>
+</div>
+</div>
+<!-- Charts -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="lg:col-span-2 flex flex-col gap-4 rounded-xl p-6 glassmorphism">
+<div class="flex justify-between items-center">
+<p class="text-lg font-bold">Sales Analytics</p>
+<div class="flex gap-1 text-sm">
+<button class="px-3 py-1 rounded-md bg-black/5 dark:bg-white/5">Week</button>
+<button class="px-3 py-1 rounded-md bg-primary/20 text-primary">Month</button>
+<button class="px-3 py-1 rounded-md bg-black/5 dark:bg-white/5">Year</button>
+</div>
+</div>
+<div class="flex gap-1 items-baseline">
+<p class="tracking-tight text-4xl font-bold">$56,789</p>
+<p class="text-green-500 text-base font-medium">+15.2%</p>
+</div>
+<div class="h-64">
+<svg fill="none" height="100%" preserveaspectratio="none" viewbox="-3 0 478 150" width="100%" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25V149H0V109Z" fill="url(#sales-gradient)"></path>
+<path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25" stroke="#1A73E8" stroke-linecap="round" stroke-width="3"></path>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="sales-gradient" x1="236" x2="236" y1="1" y2="149">
+<stop stop-color="#1A73E8" stop-opacity="0.4"></stop>
+<stop offset="1" stop-color="#1A73E8" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+</div>
+<div class="flex flex-col gap-4 rounded-xl p-6 glassmorphism">
+<p class="text-lg font-bold">Top Selling Categories</p>
+<div class="flex-1 flex items-center justify-center relative">
+<svg class="w-full h-full" viewbox="0 0 36 36">
+<path class="stroke-black/10 dark:stroke-white/10" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#e6e6e6" stroke-width="2.5"></path>
+<path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#FF00FF" stroke-dasharray="25, 100" stroke-width="3"></path>
+<path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#00FFFF" stroke-dasharray="35, 100" stroke-dashoffset="-25" stroke-width="3"></path>
+<path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#1A73E8" stroke-dasharray="40, 100" stroke-dashoffset="-60" stroke-width="3"></path>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="text-3xl font-bold">2.4k</span>
+<span class="text-sm text-text-light-secondary dark:text-dark-secondary">Total Sales</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+<div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-primary"></div><span>WP Themes (40%)</span></div>
+<div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-accent-cyan"></div><span>UI Kits (35%)</span></div>
+<div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-accent-magenta"></div><span>Plugins (25%)</span></div>
+</div>
+</div>
+</div>
+<!-- Data Table -->
+<div class="flex flex-col rounded-xl glassmorphism">
+<div class="p-4 border-b border-border-light dark:border-border-dark">
+<div class="flex items-center gap-2 text-sm">
+<button class="px-4 py-2 rounded-lg font-semibold bg-primary/20 text-primary">Pending Approvals</button>
+<button class="px-4 py-2 rounded-lg font-semibold text-text-light-secondary dark:text-dark-secondary">Recently Added</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="text-xs text-text-light-secondary dark:text-dark-secondary uppercase">
+<tr>
+<th class="px-6 py-3" scope="col">Product Name</th>
+<th class="px-6 py-3" scope="col">Seller</th>
+<th class="px-6 py-3" scope="col">Category</th>
+<th class="px-6 py-3" scope="col">Date Submitted</th>
+<th class="px-6 py-3" scope="col">Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-b border-border-light dark:border-border-dark">
+<td class="px-6 py-4 font-medium">Futuristic UI Kit</td>
+<td class="px-6 py-4">PixelPerfect</td>
+<td class="px-6 py-4">UI Kits</td>
+<td class="px-6 py-4">2023-10-27</td>
+<td class="px-6 py-4 flex gap-2">
+<button class="px-3 py-1 text-sm font-medium text-white bg-green-500 rounded-md">Approve</button>
+<button class="px-3 py-1 text-sm font-medium text-white bg-red-500 rounded-md">Reject</button>
+</td>
+</tr>
+<tr class="border-b border-border-light dark:border-border-dark">
+<td class="px-6 py-4 font-medium">Astra Pro Theme</td>
+<td class="px-6 py-4">ThemeDevs</td>
+<td class="px-6 py-4">WP Themes</td>
+<td class="px-6 py-4">2023-10-26</td>
+<td class="px-6 py-4 flex gap-2">
+<button class="px-3 py-1 text-sm font-medium text-white bg-green-500 rounded-md">Approve</button>
+<button class="px-3 py-1 text-sm font-medium text-white bg-red-500 rounded-md">Reject</button>
+</td>
+</tr>
+<tr class="border-b border-border-light dark:border-border-dark">
+<td class="px-6 py-4 font-medium">SEO Optimizer Plugin</td>
+<td class="px-6 py-4">RankHigh</td>
+<td class="px-6 py-4">Plugins</td>
+<td class="px-6 py-4">2023-10-26</td>
+<td class="px-6 py-4 flex gap-2">
+<button class="px-3 py-1 text-sm font-medium text-white bg-green-500 rounded-md">Approve</button>
+<button class="px-3 py-1 text-sm font-medium text-white bg-red-500 rounded-md">Reject</button>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4 font-medium">Mobile App Source</td>
+<td class="px-6 py-4">CodeGenius</td>
+<td class="px-6 py-4">Mobile Apps</td>
+<td class="px-6 py-4">2023-10-25</td>
+<td class="px-6 py-4 flex gap-2">
+<button class="px-3 py-1 text-sm font-medium text-white bg-green-500 rounded-md">Approve</button>
+<button class="px-3 py-1 text-sm font-medium text-white bg-red-500 rounded-md">Reject</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

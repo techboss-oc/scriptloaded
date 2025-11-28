@@ -1,0 +1,247 @@
+{
+  "project": {
+    "name": "Scriptloaded",
+    "description": "A modern marketplace for website scripts, templates, WordPress themes & plugins, and app source codes. Single seller (admin) marketplace. Frontend built from Stitch UI exports (HTML/CSS). Backend in vanilla PHP + MySQL. Prices displayed in USD and NGN. Each product includes preview image(s) and two YouTube videos (overview and installation guide).",
+    "ui_assets_path": "/assets/stitch-export",
+    "primary_color": "#1A73E8",
+    "secondary_style": "neo colors + glassmorphism + neomorphism",
+    "modes": ["light", "dark"],
+    "admin_is_only_seller": true,
+    "currencies": ["USD", "NGN"],
+    "currency_rates_source": "config/manual (default) + optional external API if provided",
+    "php_version": "8.1+",
+    "mysql_version": "8+"
+  },
+
+  "deliverables": [
+    "Full project folder ready to run on Linux (Apache/Nginx + PHP-FPM) or XAMPP",
+    "SQL file with schema and sample seed data",
+    "README with setup steps, environment variables and run commands",
+    "Unit/integration test checklist (PHP unit style - simple scripts included)",
+    "Admin-only selling workflows and admin UI",
+    "All pages integrated with Stitch UI HTML/CSS assets",
+    "Secure user auth (login, password reset, session handling), but only admin can upload products",
+    "Product pages with preview images, YouTube embeds, multi-currency display and toggle",
+    "Download link generation for purchased items",
+    "Basic payment abstraction hooks (placeholders for Stripe/Paystack/Flutterwave) with offline demo mode",
+    "CSRF protection and prepared statements everywhere"
+  ],
+
+  "folder_structure": {
+    "root": {
+      "index.php": "Front controller for main site (routes to homepage & product pages)",
+      "admin": {
+        "index.php": "Admin dashboard landing",
+        "products.php": "List/manage products",
+        "product_edit.php": "Edit product form",
+        "product_new.php": "Create product form",
+        "orders.php": "View orders & transactions",
+        "settings.php": "Currency & site settings",
+        "auth.php": "Admin login/logout",
+        "partials": {
+          "header.php": "Admin header",
+          "sidebar.php": "Admin side navigation",
+          "footer.php": "Admin footer"
+        }
+      },
+      "user": {
+        "login.php": "User login (buyers)",
+        "register.php": "User register",
+        "dashboard.php": "User dashboard - purchases, downloads, tickets",
+        "download.php": "Serve downloads for purchases"
+      },
+      "assets": {
+        "css": "stitch-export CSS files + compiled custom css (styles.css)",
+        "js": "stitch-export JS + custom site JS",
+        "images": "product preview images and logos"
+      },
+      "api": {
+        "product.php": "AJAX product endpoints",
+        "auth.php": "AJAX auth endpoints",
+        "purchase.php": "AJAX purchase/payment endpoints"
+      },
+      "inc": {
+        "config.php": "Configuration & environment loader",
+        "db.php": "Database connection (PDO)",
+        "auth.php": "Auth helper functions",
+        "csrf.php": "CSRF helper",
+        "helpers.php": "Input sanitization, file upload helpers",
+        "mail.php": "Email sending (PHP mail wrapper)"
+      },
+      "sql": {
+        "schema.sql": "DB create statements",
+        "seed.sql": "Optional seed data"
+      },
+      "README.md": "Project setup, env, commands",
+      ".env.example": "Example env variables (DB creds, base URL, currency rate fallback)"
+    }
+  },
+
+  "database_schema": {
+    "notes": "Normalized but pragmatic structure for a marketplace where admin is only seller. Use InnoDB, utf8mb4.",
+    "sql": "-- schema.sql\nCREATE DATABASE IF NOT EXISTS scriptloaded CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;\nUSE scriptloaded;\n\n-- users (buyers and admin). admin flag indicates seller/admin\nCREATE TABLE users (\n  id INT AUTO_INCREMENT PRIMARY KEY,\n  email VARCHAR(255) UNIQUE NOT NULL,\n  password_hash VARCHAR(255) NOT NULL,\n  full_name VARCHAR(255) DEFAULT NULL,\n  is_admin TINYINT(1) DEFAULT 0,\n  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n  updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP\n) ENGINE=InnoDB;\n\n-- products (admin uploads only)\nCREATE TABLE products (\n  id INT AUTO_INCREMENT PRIMARY KEY,\n  title VARCHAR(255) NOT NULL,\n  slug VARCHAR(255) NOT NULL UNIQUE,\n  short_description TEXT,\n  long_description LONGTEXT,\n  preview_image VARCHAR(255),\n  gallery JSON NULL,\n  youtube_overview VARCHAR(255) NULL,\n  youtube_install VARCHAR(255) NULL,\n  price_usd DECIMAL(10,2) NOT NULL DEFAULT 0.00,\n  price_ngn BIGINT NOT NULL DEFAULT 0,\n  category VARCHAR(100) NULL,\n  tags JSON NULL,\n  version VARCHAR(50) NULL,\n  changelog LONGTEXT NULL,\n  file_path VARCHAR(255) NULL,\n  downloads_count INT DEFAULT 0,\n  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n  updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,\n  is_active TINYINT(1) DEFAULT 1\n) ENGINE=InnoDB;\n\n-- purchases / orders\nCREATE TABLE orders (\n  id INT AUTO_INCREMENT PRIMARY KEY,\n  user_id INT NOT NULL,\n  product_id INT NOT NULL,\n  amount DECIMAL(12,2) NOT NULL,\n  currency VARCHAR(3) NOT NULL,\n  payment_gateway VARCHAR(50) NULL,\n  gateway_ref VARCHAR(255) NULL,\n  status ENUM('pending','completed','failed','refunded') DEFAULT 'pending',\n  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n  updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,\n  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,\n  FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE\n) ENGINE=InnoDB;\n\n-- settings table (site-wide settings)\nCREATE TABLE settings (\n  `key` VARCHAR(100) PRIMARY KEY,\n  `value` TEXT\n) ENGINE=InnoDB;\n\n-- optional: reviews\nCREATE TABLE reviews (\n  id INT AUTO_INCREMENT PRIMARY KEY,\n  user_id INT NOT NULL,\n  product_id INT NOT NULL,\n  rating TINYINT NOT NULL,\n  comment TEXT,\n  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,\n  FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE\n) ENGINE=InnoDB;\n"
+  },
+
+  "wireframes_to_templates": {
+    "notes": "Map the Stitch exported HTML/CSS component files to server templates. AI should assemble templates by replacing placeholder text and assets with dynamic PHP variables.",
+    "mapping": {
+      "homepage.html": "templates/home.php",
+      "category_list.html": "templates/listing.php",
+      "product_detail.html": "templates/product.php",
+      "auth_login.html": "user/login.php",
+      "auth_register.html": "user/register.php",
+      "user_dashboard.html": "user/dashboard.php",
+      "admin_dashboard.html": "admin/index.php",
+      "admin_products_list.html": "admin/products.php",
+      "admin_product_form.html": "admin/product_new.php (and product_edit.php)"
+    },
+    "integration_instructions": "Replace static content (product rows, images, videos, price) with PHP echo statements. Keep classes and CSS from Stitch exactly to preserve styling. Add small helper functions for URL generation and XSS escaping (escape_html())."
+  },
+
+  "api_endpoints_and_routes": {
+    "public": {
+      "/": "index.php -> renders homepage with featured products",
+      "/category.php?slug={slug}": "product listing for category",
+      "/product.php?slug={slug}": "product detail page",
+      "/search.php?q={query}": "search results",
+      "/auth/login (POST)": "user/auth login endpoint (server-side POST)",
+      "/auth/register (POST)": "user/register endpoint",
+      "/purchase.php (POST)": "Start purchase: create order row status=pending and return payment payload",
+      "/webhook/payment_gateway.php": "Placeholder to accept payment gateway callbacks"
+    },
+    "admin": {
+      "/admin": "admin/index.php (login required)",
+      "/admin/products.php": "list and manage products",
+      "/admin/product_new.php": "form to create product (POST)",
+      "/admin/product_edit.php?id={id}": "edit and save product (POST)",
+      "/admin/orders.php": "manage orders, mark completed/refunded"
+    },
+    "ajax": {
+      "/api/product.php?action=price_convert&product_id={id}&to=NGN|USD": "Return converted price using saved rate or manual rate from settings"
+    }
+  },
+
+  "security_and_validation": {
+    "auth": {
+      "password_hashing": "Use password_hash() and password_verify() (PASSWORD_DEFAULT)",
+      "session": "Use secure session cookies (httponly, secure when HTTPS). Regenerate session id after login.",
+      "rate_limit": "Simple per-IP rate limiter for login attempts (store attempts in session or DB)"
+    },
+    "db": "Use PDO with prepared statements for all DB interactions. Never interpolate variables directly into SQL.",
+    "csrf": "All POST forms must include a CSRF token via inc/csrf.php helper. Validate on server.",
+    "file_uploads": {
+      "allowed_types": [".zip", ".rar", ".tar", ".7z"],
+      "max_size_mb": 200,
+      "virus_scan_note": "Recommend external scanning tool in production",
+      "storage": "Store uploads outside webroot or in protected folder with randomized file names and signed temporary download tokens for purchases"
+    },
+    "xss": "Escape all output with a helper escape_html() which uses htmlspecialchars(..., ENT_QUOTES, 'UTF-8')",
+    "headers": "Set security headers: Content-Security-Policy, X-Frame-Options, X-Content-Type-Options, Referrer-Policy"
+  },
+
+  "currency_handling": {
+    "design_decision": "Products store both USD and NGN prices. Primary pricing must be set by admin in USD; NGN auto-calculated but editable.",
+    "settings_keys": {
+      "currency_default": "USD",
+      "currency_rate_usd_to_ngn": "e.g., 1150.00 (float)",
+      "currency_formatting": "helper function format_currency(amount, 'USD')"
+    },
+    "api_conversion_endpoint": "/api/product.php?action=price_convert"
+  },
+
+  "payment_integration": {
+    "notes": "Implement abstractions with hooks for controllers. Provide demo offline payment mode (generate order and set status completed for testing). Provide guidance to add Stripe/Paystack/Flutterwave credentials in .env.",
+    "example_flow": [
+      "User clicks Buy -> Create order (pending) -> Redirect to payment gateway or show offline details -> On gateway callback validate payment and update order status -> Generate signed download token and allow download"
+    ],
+    "placeholders": "Add files inc/payments/stripe.php, inc/payments/paystack.php with TODOs and example code comments"
+  },
+
+  "dev_steps_for_ai": [
+    "1. Create the project directory following the folder structure above.",
+    "2. Copy Stitch UI exports into assets/css, assets/js and map their HTML files to templates (see wireframes_to_templates).",
+    "3. Create inc/config.php that reads .env or fallback .env.example. Ensure DB credentials, BASE_URL, currency_rate are environment variables.",
+    "4. Implement inc/db.php using PDO and error handling (exceptions).",
+    "5. Implement inc/auth.php with functions: current_user(), require_admin(), login_user($user_id), logout_user().",
+    "6. Implement CSRF helpers: generate_csrf(), validate_csrf(). Include input token in all forms.",
+    "7. Build homepage (index.php) that queries products table for featured and recent items and passes product arrays into the HTML template (use include templates).",
+    "8. Build product detail page (product.php) that fetches product by slug and renders preview image, YouTube embeds (use iframe with sanitized src), price (USD/NGN), buy button, seller info (admin fixed). Show installation video and gallery carousel from JSON gallery.",
+    "9. Build user auth: register/login, password hashing, email verification token (simple implementation optional), forgot password (token emailed) — include mailer wrapper inc/mail.php.",
+    "10. Build purchase flow: create order row, demo offline payment (set completed), and implement webhook endpoint. On completed: increment product.downloads_count and generate a signed one-time download token stored in orders table or new downloads table.",
+    "11. Build admin panel: admin login required. Implement product CRUD with file upload handling and gallery JSON-saving. Implement product approval flow (but admin is owner so approvals optional).",
+    "12. Build orders page: show all orders, allow marking status completed/failed/refunded with reason.",
+    "13. Add settings page to set currency rates, site title, admin email, and file storage path.",
+    "14. Add input validation everywhere and form error messages aggregated and styled to match Stitch CSS.",
+    "15. Implement logging for critical operations (upload, order created, login attempts) to logs/app.log.",
+    "16. Add simple unit tests (PHP scripts) to verify DB connection, user auth, product retrieval and purchase creation.",
+    "17. Create README.md with setup steps, how to import schema.sql, how to set .env and file permissions."
+  ],
+
+  "sample_php_snippets": {
+    "db_connection": "<?php\n// inc/db.php\n$pdo = new PDO(\"mysql:host={$DB_HOST};dbname={$DB_NAME};charset=utf8mb4\", $DB_USER, $DB_PASS, [\n    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,\n    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,\n]);\nreturn $pdo;\n?>",
+    "prepared_statement": "<?php\n// safe query example\n$stmt = $pdo->prepare('SELECT * FROM products WHERE slug = :slug LIMIT 1');\n$stmt->execute(['slug' => $slug]);\n$product = $stmt->fetch();\n?>",
+    "auth_login": "<?php\n// inc/auth.php (login_user)\nfunction login_user($user_id) {\n  session_regenerate_id(true);\n  $_SESSION['user_id'] = $user_id;\n}\nfunction current_user() {\n  global $pdo;\n  if (!empty($_SESSION['user_id'])) {\n    $stmt = $pdo->prepare('SELECT id, email, full_name, is_admin FROM users WHERE id = ?');\n    $stmt->execute([$_SESSION['user_id']]);\n    return $stmt->fetch();\n  }\n  return null;\n}\n?>",
+    "csrf_helper": "<?php\n// inc/csrf.php\nfunction generate_csrf() {\n  if (empty($_SESSION['csrf_token'])) $_SESSION['csrf_token'] = bin2hex(random_bytes(32));\n  return $_SESSION['csrf_token'];\n}\nfunction validate_csrf($token) {\n  return hash_equals($_SESSION['csrf_token'] ?? '', $token ?? '');\n}\n?>",
+    "signed_download_token": "<?php\n// generate token when purchase completed\n$token = bin2hex(random_bytes(24));\n$expires = date('Y-m-d H:i:s', strtotime('+2 hours'));\n$pdo->prepare('INSERT INTO downloads (order_id, token, expires_at) VALUES (?, ?, ?)')->execute([$order_id, $token, $expires]);\n$download_url = BASE_URL . '/user/download.php?token=' . $token;\n?>"
+  },
+
+  "testing_and_qc": {
+    "unit_tests": [
+      "db_connection_test.php - verifies connection and schema existence",
+      "auth_test.php - create test user, login, password verify",
+      "product_crud_test.php - create product, read, update, delete",
+      "purchase_flow_test.php - create order in offline mode, mark completed, verify download created"
+    ],
+    "manual_checks": [
+      "Frontend layout matches Stitch design on desktop/tablet/mobile",
+      "Currency toggle updates displayed prices without page reload (AJAX) or with clean fallback",
+      "YouTube embed sanitized to only allow trusted host (youtube.com or youtu.be)",
+      "Admin can create product with gallery JSON and upload file (protected)",
+      "Download tokens only work for correct user & within expiration window",
+      "CSRF tokens must be validated on all POST endpoints"
+    ],
+    "bug_checklist": [
+      "SQL injections prevented (prepared statements everywhere)",
+      "XSS prevented via escaping outputs",
+      "File upload validation and storage outside web root",
+      "Session fixation prevented by regenerating id at login",
+      "Passwords salted and hashed"
+    ]
+  },
+
+  "deployment_notes": {
+    "server_reqs": "Linux server, PHP 8.1+, MySQL 8+, mod_rewrite if friendly URLs desired, HTTPS (strongly recommended)",
+    "permissions": "Writable folders: assets/images/uploads, logs/; do not set 777 - prefer 755/644 adjusted to webserver user",
+    "env": ".env variables required: DB_HOST, DB_NAME, DB_USER, DB_PASS, BASE_URL, ADMIN_EMAIL, CURRENCY_RATE_USD_NGN",
+    "backups": "Schedule nightly DB dump and backup the uploads directory",
+    "production_security": "Use HTTPS and HSTS, enforce secure cookies, run file scanning and malware checks"
+  },
+
+  "ai_prompts_for_subtasks": {
+    "scaffold_prompt": "Create full vanilla PHP project scaffold with the folder structure specified. Use PDO and include inc/config.php reading from .env. Copy Stitch exported CSS/JS into assets and create template files that echo dynamic content. Do not change class names in Stitch CSS.",
+    "db_prompt": "Create SQL schema file exactly as provided in database_schema.sql. Also create seed.sql with a sample admin user (email: admin@scriptloaded.test, password: Admin@123 — store as hash in seed.sql) and two sample products with gallery JSON and YouTube links placeholders.",
+    "admin_crud_prompt": "Build admin product CRUD pages. Use server-side validation, CSRF check and file upload logic. Save gallery as JSON array of filenames. Save zipped product file in protected storage outside webroot and store path in products.file_path.",
+    "purchase_flow_prompt": "Implement purchase flow using an offline demo gateway. On order completion, create a downloads table record with a signed token valid for 2 hours. Provide admin UI to mark payments as completed/failed and to search by gateway_ref.",
+    "payment_webhook_prompt": "Implement webhook endpoints with HMAC verification placeholder and instructions to configure gateway secret in .env. Validate payload and update orders accordingly.",
+    "final_tests_prompt": "Run automated tests in sql/unit tests described. Output results. Then run manual QC checklist and output screenshots or logs of any visual mismatch or errors."
+  },
+
+  "readme_outline": {
+    "1": "Project overview",
+    "2": "Requirements (PHP/MySQL)",
+    "3": "Installation steps: clone, composer (if used), import SQL, set .env, set writable folders",
+    "4": "Run local dev server example: php -S localhost:8000 -t public or XAMPP/Apache config",
+    "5": "How to add admin (seed or from DB)",
+    "6": "How to configure payment gateways",
+    "7": "Maintenance & backup notes",
+    "8": "How to run tests"
+  },
+
+  "final_instructions_for_AI": [
+    "When generating code, include inline comments explaining purpose of functions and security considerations.",
+    "Where dynamic content is displayed (product title, description, price), always use escape_html() wrapper in templates.",
+    "Preserve Stitch classes and avoid rewriting CSS unless necessary to inject small responsive fixes.",
+    "Create initial seed admin account and log output to build log.",
+    "Package the final project into a zip and include schema.sql, seed.sql, .env.example and README.md."
+  ]
+}

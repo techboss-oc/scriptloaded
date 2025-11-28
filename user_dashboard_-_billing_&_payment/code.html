@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Scriptloaded - Billing &amp; Payment Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#1A73E8",
+              "background-light": "#F0F2F5",
+              "background-dark": "#12121F",
+              "neo-cyan": "#00FFFF",
+              "neo-magenta": "#FF00FF",
+            },
+            fontFamily: {
+              "display": ["Space Grotesk", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+            boxShadow: {
+              'glass-light': '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+              'glass-dark': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+              'neo-light-out': '8px 8px 16px #d1d9e6, -8px -8px 16px #ffffff',
+              'neo-light-in': 'inset 8px 8px 16px #d1d9e6, inset -8px -8px 16px #ffffff',
+              'neo-dark-out': '6px 6px 12px #0e0e18, -6px -6px 12px #161626',
+              'neo-dark-in': 'inset 6px 6px 12px #0e0e18, inset -6px -6px 12px #161626',
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-200 antialiased">
+<div class="relative min-h-screen w-full flex">
+<!-- Background Gradient Blur -->
+<div class="absolute top-0 left-0 w-72 h-72 bg-neo-cyan/30 dark:bg-neo-cyan/20 rounded-full filter blur-3xl opacity-50 dark:opacity-30 animate-pulse"></div>
+<div class="absolute bottom-0 right-0 w-96 h-96 bg-neo-magenta/30 dark:bg-neo-magenta/20 rounded-full filter blur-3xl opacity-50 dark:opacity-30 animate-pulse animation-delay-4000"></div>
+<!-- Side Navigation -->
+<aside class="sticky top-0 h-screen w-64 flex-shrink-0 p-4 z-20">
+<div class="flex h-full flex-col bg-white/10 dark:bg-black/20 backdrop-blur-lg border border-white/20 dark:border-white/10 rounded-xl shadow-glass-light dark:shadow-glass-dark">
+<div class="flex items-center gap-3 p-4 border-b border-white/20 dark:border-white/10">
+<img alt="Scriptloaded logo" class="h-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQCudSjW93V6t6eB-52IQ5f6Z4bfE1UF3XaGJTeNUkCuC9nHvK1V0qQpoqXlzslhhZYgXerVXdNRSGgIJsgGjj-X8r5Whq8l4aiT7QJmTBm9fX61H_dsvAyV8pkMtrjGaoKr3iTt6UH8N-kLy4HGF11DJbMQyAr4CKrgwenJJKRHdcGn2YqezEKtv0MnOXS4joHDtEHLBDgUK4V6Aiy0acwDY__VaNcih4eiCT0YOdJUl3m7aXdKjPdMYMDJlE21F9Y-9bvuRB78O8"/>
+<h1 class="text-xl font-bold text-gray-900 dark:text-white">Scriptloaded</h1>
+</div>
+<div class="flex flex-col gap-4 p-4 flex-grow">
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="text-sm font-medium leading-normal">Dashboard</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined">inventory_2</span>
+<p class="text-sm font-medium leading-normal">My Items</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/20 text-primary dark:text-white dark:bg-primary">
+<span class="material-symbols-outlined fill">receipt_long</span>
+<p class="text-sm font-bold leading-normal">Billing</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm font-medium leading-normal">Settings</p>
+</div>
+</div>
+<div class="p-4 border-t border-white/20 dark:border-white/10">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User avatar with abstract background" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB-UE2-Z3JAB_tWnRNyeFkxufvr601hKQ9fE-l4RVmBp1lfSBteuA4usDTFAUGWRKGPmOLDT7m9_9bUPptAv7z7SXhphlPfwscMqA0oxdjL9SLNozL8Ke9UCIJwjwk50M32WsMVyDU779I3EHQxOkB-wvGedz8dSMntVQAaIQyOCN23u79hkxzdmV29U9lT0z-k8lGxmJscv8Ajrv05FtHnMg6gu-0BC0ljwQ-NVcbuLkwf2H8TLVKS-MrtKyusqYoRv0PN2DNRM0Yk");'></div>
+<div class="flex-1">
+<h2 class="text-gray-900 dark:text-white text-base font-medium leading-normal">John Doe</h2>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">john.doe@example.com</p>
+</div>
+<button class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
+<span class="material-symbols-outlined">logout</span>
+</button>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 p-4 pr-8">
+<div class="h-full w-full bg-white/10 dark:bg-black/20 backdrop-blur-lg border border-white/20 dark:border-white/10 rounded-xl shadow-glass-light dark:shadow-glass-dark p-6 lg:p-8 overflow-y-auto">
+<!-- Page Header -->
+<div class="flex flex-wrap justify-between items-center gap-4 mb-8">
+<h1 class="text-gray-900 dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">Billing &amp; Payment Settings</h1>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-green-500">lock</span>
+<p class="text-sm text-gray-500 dark:text-gray-400">Your information is encrypted and secure.</p>
+</div>
+</div>
+<!-- Tabs -->
+<div class="border-b border-gray-300 dark:border-gray-700 mb-8">
+<div class="flex gap-8">
+<a class="flex flex-col items-center justify-center border-b-[3px] border-primary pb-3" href="#">
+<p class="text-primary dark:text-white text-sm font-bold leading-normal tracking-[0.015em]">Payment Methods</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-gray-500 dark:text-gray-400 pb-3" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em] hover:text-primary dark:hover:text-white transition-colors">Billing History</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-gray-500 dark:text-gray-400 pb-3" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em] hover:text-primary dark:hover:text-white transition-colors">Billing Information</p>
+</a>
+</div>
+</div>
+<!-- Content Area -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Left Column: Saved Methods -->
+<div class="md:col-span-2 space-y-6">
+<h2 class="text-gray-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">Saved Payment Methods</h2>
+<div class="space-y-4">
+<!-- Card 1 -->
+<div class="flex items-center gap-4 bg-background-light dark:bg-background-dark p-4 rounded-lg shadow-neo-light-out dark:shadow-neo-dark-out">
+<div class="flex items-center gap-4 flex-1">
+<div class="bg-center bg-no-repeat aspect-[1.58] bg-contain h-8 w-12" data-alt="Visa card logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuChyKtgnbbG77wOy2D8fXMjrOUSHfLmCafVFtB9iEj3Ax4mfPG8Ou38oqk1rpWRDZYzhF-4qDInIwNczM_7I8uIFCjY4FG7F3icuLBJ-XtqsluNU48q5MBtNcQxIKvysQq5Iw3wmgP1iIKadLS2JT49JTtHA0sqUzC5R1ta0SHROVsgpspphP8Kx6iWSgbbJm3oI77C7oa7HlIIngMuwdlsNJZxWQP7HTQXBu7XE1FC3fQuqCytoc1FOKKL52gIwmL28mDpyPVfkOmR");'></div>
+<div class="flex flex-col justify-center">
+<p class="text-gray-900 dark:text-white text-base font-medium leading-normal">Visa ending in 1234</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">Expires 08/26</p>
+</div>
+</div>
+<div class="shrink-0 flex items-center gap-4">
+<span class="text-xs font-bold uppercase bg-primary/20 text-primary dark:bg-primary dark:text-white px-2 py-1 rounded-full">Primary</span>
+<button class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-white text-sm font-medium leading-normal">Edit</button>
+<button class="text-gray-500 dark:text-gray-400 hover:text-red-500 text-sm font-medium leading-normal">Delete</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="flex items-center gap-4 bg-background-light dark:bg-background-dark p-4 rounded-lg shadow-neo-light-out dark:shadow-neo-dark-out">
+<div class="flex items-center gap-4 flex-1">
+<div class="bg-center bg-no-repeat aspect-[1.58] bg-contain h-8 w-12" data-alt="Mastercard logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAtohzSjjcGUOZtr1V3K7dA9I_Qt-116P8dOxKULNnlK6T525Hzn8-m0uFeTIs-rCkCxQSSf7CyBMR2m-zaSfkm3BM2HMB4TmdGQeJg11z6B9-pwWhc7bPTzXGDIqg8rFDfpg9LVA9AYfeQ-c7WZ5G6pbqmSyKaYsc0sRcYs12Zh78vnOaClT_1-S9pZk7BShf8RyuGTxmoLw1Fbn8FUQQLnUIdObG1U8H-G6QqgaSAO_dfK2R65TFhWH4V4iSkGNrpojRexYpJGUyB");'></div>
+<div class="flex flex-col justify-center">
+<p class="text-gray-900 dark:text-white text-base font-medium leading-normal">Mastercard ending in 5678</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">Expires 11/24</p>
+</div>
+</div>
+<div class="shrink-0 flex items-center gap-4">
+<button class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-white text-sm font-medium leading-normal">Set as Primary</button>
+<button class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-white text-sm font-medium leading-normal">Edit</button>
+<button class="text-gray-500 dark:text-gray-400 hover:text-red-500 text-sm font-medium leading-normal">Delete</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Add New Card -->
+<div class="space-y-6">
+<h2 class="text-gray-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">Add a New Card</h2>
+<div class="bg-background-light dark:bg-background-dark p-6 rounded-xl shadow-neo-light-in dark:shadow-neo-dark-in space-y-4">
+<form class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1" for="card-number">Card Number</label>
+<input class="w-full bg-background-light dark:bg-background-dark rounded-lg border-none shadow-neo-light-in dark:shadow-neo-dark-in focus:ring-2 focus:ring-primary text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500" id="card-number" placeholder="**** **** **** ****" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1" for="card-holder">Card Holder</label>
+<input class="w-full bg-background-light dark:bg-background-dark rounded-lg border-none shadow-neo-light-in dark:shadow-neo-dark-in focus:ring-2 focus:ring-primary text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500" id="card-holder" placeholder="John Doe" type="text"/>
+</div>
+<div class="flex gap-4">
+<div class="flex-1">
+<label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1" for="expiry-date">Expiry Date</label>
+<input class="w-full bg-background-light dark:bg-background-dark rounded-lg border-none shadow-neo-light-in dark:shadow-neo-dark-in focus:ring-2 focus:ring-primary text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500" id="expiry-date" placeholder="MM/YY" type="text"/>
+</div>
+<div class="flex-1">
+<label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1" for="cvc">CVC</label>
+<input class="w-full bg-background-light dark:bg-background-dark rounded-lg border-none shadow-neo-light-in dark:shadow-neo-dark-in focus:ring-2 focus:ring-primary text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500" id="cvc" placeholder="***" type="text"/>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 rounded-lg h-12 px-6 bg-primary text-white text-sm font-bold shadow-md hover:bg-primary/90 transition-all active:shadow-inner" type="submit">
+<span class="material-symbols-outlined">add_card</span>
+<span>Add Payment Method</span>
+</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

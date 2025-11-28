@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Scriptloaded - Admin Profile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1A73E8",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111821",
+                        "glass-light": "rgba(255, 255, 255, 0.5)",
+                        "glass-dark": "rgba(30, 41, 59, 0.5)",
+                        "border-light": "rgba(203, 213, 225, 0.3)",
+                        "border-dark": "rgba(71, 85, 105, 0.3)",
+                        "text-light-primary": "#1e293b",
+                        "text-dark-primary": "#f8fafc",
+                        "text-light-secondary": "#64748b",
+                        "text-dark-secondary": "#94a3b8",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.75rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        'soft-light': '10px 10px 20px #d9d9d9, -10px -10px 20px #ffffff',
+                        'soft-dark': '10px 10px 20px #0c1118, -10px -10px 20px #161f2a',
+                        'inner-soft-light': 'inset 5px 5px 10px #d9d9d9, inset -5px -5px 10px #ffffff',
+                        'inner-soft-dark': 'inset 5px 5px 10px #0c1118, inset -5px -5px 10px #161f2a'
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-light-primary dark:text-dark-primary antialiased">
+<div class="relative flex min-h-screen w-full">
+<!-- SideNavBar -->
+<aside class="flex-col justify-between hidden h-screen w-64 border-r border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark p-4 lg:flex">
+<div class="flex flex-col gap-8">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">hub</span>
+<h1 class="text-xl font-bold text-text-light-primary dark:text-dark-primary">Scriptloaded</h1>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12" data-alt="Admin avatar placeholder image" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCMSwVWiNgbPGOdfJ9CpjrEl2e-_5mSL2blaD_gBTdHh1fnfAwiq0FQKODglsnHx88lFsGVnbvy4usRMRoAbep8pCZlwfRzgiR_ks4NPokcMjCmiFbBMVtJZ3QIZ-Eey4IfDsWqMTBZiss9zAAGK1qSzaGaepW3uUZTwj5Wj-rGDx34eGEZkewGRHmjP0YQ9o9ZqO7p5-bUl03pqCUpLPj4eirKrrjxAtXpAbiS5UnBwDklELV7wQmV4Lev1pr3zJ0QaRksTcNCnnyb");'></div>
+<div class="flex flex-col">
+<h1 class="text-text-light-primary dark:text-dark-primary text-base font-medium leading-normal">Admin Name</h1>
+<p class="text-text-light-secondary dark:text-dark-secondary text-sm font-normal leading-normal">Super Admin</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-light-secondary dark:text-dark-secondary hover:bg-primary/10 hover:text-primary" href="#">
+<span class="material-symbols-outlined text-2xl">dashboard</span>
+<p class="text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-light-secondary dark:text-dark-secondary hover:bg-primary/10 hover:text-primary" href="#">
+<span class="material-symbols-outlined text-2xl">shopping_bag</span>
+<p class="text-sm font-medium leading-normal">Products</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-light-secondary dark:text-dark-secondary hover:bg-primary/10 hover:text-primary" href="#">
+<span class="material-symbols-outlined text-2xl">group</span>
+<p class="text-sm font-medium leading-normal">Users</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-light-secondary dark:text-dark-secondary hover:bg-primary/10 hover:text-primary" href="#">
+<span class="material-symbols-outlined text-2xl">bar_chart</span>
+<p class="text-sm font-medium leading-normal">Analytics</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/20 text-primary" href="#">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">settings</span>
+<p class="text-sm font-medium leading-normal">Settings</p>
+</a>
+</nav>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-light-secondary dark:text-dark-secondary hover:bg-primary/10 hover:text-primary" href="#">
+<span class="material-symbols-outlined text-2xl">help</span>
+<p class="text-sm font-medium leading-normal">Support</p>
+</a>
+<button class="flex w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-11 px-4 bg-primary/20 text-primary hover:bg-primary/30">
+<span class="material-symbols-outlined text-2xl">logout</span>
+<span class="truncate text-sm font-bold">Logout</span>
+</button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 p-6 lg:p-10">
+<div class="flex flex-col gap-8 max-w-5xl mx-auto">
+<!-- PageHeading -->
+<div class="flex flex-wrap justify-between items-center gap-3">
+<p class="text-text-light-primary dark:text-dark-primary text-4xl font-bold tracking-tighter">Account Settings</p>
+</div>
+<!-- Main Content Panel -->
+<div class="w-full bg-glass-light dark:bg-glass-dark backdrop-blur-xl border border-border-light dark:border-border-dark rounded-xl shadow-soft-light dark:shadow-soft-dark">
+<!-- Tabs -->
+<div class="pb-3">
+<div class="border-b border-border-light dark:border-border-dark px-4 sm:px-8">
+<nav class="flex gap-8 -mb-px">
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-primary text-primary pb-[13px] pt-4" href="#">
+<p class="text-sm font-bold tracking-wide">Profile Details</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-text-light-secondary dark:text-dark-secondary pb-[13px] pt-4 hover:border-primary/50 hover:text-text-light-primary dark:hover:text-dark-primary" href="#">
+<p class="text-sm font-bold tracking-wide">Change Password</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-text-light-secondary dark:text-dark-secondary pb-[13px] pt-4 hover:border-primary/50 hover:text-text-light-primary dark:hover:text-dark-primary" href="#">
+<p class="text-sm font-bold tracking-wide">Notification Settings</p>
+</a>
+</nav>
+</div>
+</div>
+<!-- Profile Details Content -->
+<div class="p-4 sm:p-8">
+<!-- ProfileHeader -->
+<div class="flex @container mb-8">
+<div class="flex w-full flex-col gap-6 @[520px]:flex-row @[520px]:justify-between @[520px]:items-center">
+<div class="flex items-center gap-6">
+<div class="relative">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-24 w-24 sm:h-32 sm:w-32 shadow-soft-light dark:shadow-soft-dark" data-alt="Admin avatar placeholder image" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDQhaSPWwUWp79lzTl_dtqcbpAnE8J8HwZET8Y9CjuF5r7yHmgczHu61f2xlOHdMbQV2sY4punEpPe6eFXyxqry219BZkiQCOL9243CtSIM1smaM8k3gSQL4oFUNxTKQD5_Y0t5xcG0WZ43YEq8LJTWhQStJYk8_Y8yuJ6QujdwZB7mzfkBOZ0e_lKnunR8kRi4WTdGCLYNXD5_BMHfmYy942GU6pT80XUT0cRYic4vqXStyWbbhTrz-glaDCBanD4Q0t48g_642KWV");'></div>
+<button class="absolute bottom-0 right-0 grid place-items-center h-8 w-8 bg-background-light dark:bg-background-dark rounded-full border border-border-light dark:border-border-dark text-text-light-secondary dark:text-dark-secondary hover:text-primary hover:border-primary/50">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+</div>
+<div class="flex flex-col justify-center gap-1">
+<p class="text-text-light-primary dark:text-dark-primary text-2xl font-bold tracking-tight">Admin Name</p>
+<p class="text-text-light-secondary dark:text-dark-secondary text-base font-normal">admin@scriptloaded.com</p>
+<p class="text-text-light-secondary dark:text-dark-secondary text-base font-normal">Role: Super Admin</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Form -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- TextField: Full Name -->
+<label class="flex flex-col">
+<p class="text-text-light-primary dark:text-dark-primary text-sm font-medium leading-normal pb-2">Full Name</p>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light-primary dark:text-dark-primary focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-transparent bg-background-light dark:bg-background-dark shadow-inner-soft-light dark:shadow-inner-soft-dark h-12 placeholder:text-text-light-secondary dark:placeholder:text-dark-secondary px-4 text-base font-normal" value="Admin Name"/>
+</label>
+<!-- TextField: Phone Number -->
+<label class="flex flex-col">
+<p class="text-text-light-primary dark:text-dark-primary text-sm font-medium leading-normal pb-2">Phone Number</p>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light-primary dark:text-dark-primary focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-transparent bg-background-light dark:bg-background-dark shadow-inner-soft-light dark:shadow-inner-soft-dark h-12 placeholder:text-text-light-secondary dark:placeholder:text-dark-secondary px-4 text-base font-normal" placeholder="Add phone number"/>
+</label>
+<!-- TextField: Email Address (Read-only) -->
+<label class="flex flex-col md:col-span-2">
+<p class="text-text-light-primary dark:text-dark-primary text-sm font-medium leading-normal pb-2">Email Address</p>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light-secondary dark:text-dark-secondary focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-transparent bg-background-light/50 dark:bg-background-dark/50 shadow-inner-soft-light dark:shadow-inner-soft-dark h-12 px-4 text-base font-normal cursor-not-allowed" readonly="" value="admin@scriptloaded.com"/>
+</label>
+</div>
+<!-- Actions -->
+<div class="flex justify-end items-center gap-4 mt-8 pt-8 border-t border-border-light dark:border-border-dark">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-11 px-6 bg-transparent text-text-light-secondary dark:text-dark-secondary text-sm font-bold hover:bg-black/5 dark:hover:bg-white/5">
+<span class="truncate">Cancel</span>
+</button>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-11 px-6 bg-primary text-white text-sm font-bold shadow-soft-light dark:shadow-soft-dark hover:brightness-110">
+<span class="truncate">Save Changes</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

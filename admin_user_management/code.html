@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Scriptloaded - User Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1A73E8",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111821",
+                        "neon-cyan": "#00FFFF",
+                        "neon-magenta": "#FF00FF",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                    },
+                    boxShadow: {
+                        'soft-light': '0 10px 30px -15px rgba(0, 0, 0, 0.1)',
+                        'soft-dark': '0 10px 30px -15px rgba(0, 0, 0, 0.3)',
+                        'glow-primary': '0 0 15px rgba(26, 115, 232, 0.5)',
+                        'glow-neon': '0 0 10px rgba(0, 255, 255, 0.4)',
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background-color: rgba(255, 255, 255, 0.05);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dark .glass-panel {
+             background-color: rgba(255, 255, 255, 0.05);
+             border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .light .glass-panel {
+            background-color: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-200">
+<div class="relative min-h-screen w-full flex">
+<!-- Background Gradient -->
+<div class="absolute inset-0 z-0 overflow-hidden">
+<div class="absolute top-0 left-0 w-96 h-96 bg-primary/20 rounded-full filter blur-3xl opacity-50 animate-pulse"></div>
+<div class="absolute bottom-0 right-0 w-96 h-96 bg-neon-cyan/20 rounded-full filter blur-3xl opacity-50 animate-pulse animation-delay-4000"></div>
+</div>
+<!-- SideNavBar -->
+<aside class="w-64 flex-shrink-0 z-10 glass-panel border-r border-white/10 hidden lg:flex flex-col justify-between p-4">
+<div class="flex flex-col gap-8">
+<div class="flex items-center gap-4 text-white pl-3">
+<div class="size-8 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-white text-lg font-bold">Scriptloaded</h2>
+</div>
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="text-sm font-medium">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg" href="#">
+<span class="material-symbols-outlined">widgets</span>
+<p class="text-sm font-medium">Products</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/80 text-white shadow-glow-primary" href="#">
+<span class="material-symbols-outlined">group</span>
+<p class="text-sm font-medium">Users</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm font-medium">Settings</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg" href="#">
+<span class="material-symbols-outlined">summarize</span>
+<p class="text-sm font-medium">Reports</p>
+</a>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg" href="#">
+<span class="material-symbols-outlined">logout</span>
+<p class="text-sm font-medium">Logout</p>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-screen overflow-y-auto">
+<!-- TopNavBar -->
+<header class="flex-shrink-0 z-10 sticky top-0 flex items-center justify-between whitespace-nowrap px-6 py-3 glass-panel border-b border-white/10">
+<div class="flex items-center gap-8">
+<label class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+<input class="form-input w-full min-w-40 max-w-64 resize-none overflow-hidden rounded-lg text-white/80 dark:bg-black/20 bg-gray-600/20 focus:outline-0 focus:ring-2 focus:ring-primary h-10 placeholder:text-gray-400 pl-10 text-sm font-normal border-white/10 focus:border-primary" placeholder="Search anything..." value=""/>
+</label>
+</div>
+<div class="flex items-center gap-4">
+<button class="relative flex cursor-pointer items-center justify-center rounded-full h-10 w-10 bg-black/20 hover:bg-white/10 text-white/80 hover:text-white">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute -top-0.5 -right-0.5 flex h-4 w-4">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon-cyan opacity-75"></span>
+<span class="relative inline-flex rounded-full h-4 w-4 bg-neon-cyan/80 justify-center items-center text-[10px] text-black font-bold">3</span>
+</span>
+</button>
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Admin avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCLazheSLNQTpyIvESnpfPG7jVP8IBATUFlZoSZd0vaeyp-yrcsOAUzrr4kvgjHClsRkGg_3OBRDy4Wl2Xtv4g2r3kiwJQj9uFmLWsUzfMeryRev1KwAXIX76ElaGTnxkUvIAZ8Lvvs2rX2EyNyEHBq8YCukLyG2Q5YiAXpUplrRItwX5ysIMeIAIncbd3Pm48yiIBKPUxOrRQepw3j-Vsltb-N1KvZeDZ1bRLVdkNFqEWH1mEhbRxeidQNrgUdNpf9cLDu99Bd-DiT");'></div>
+<div class="hidden md:flex flex-col text-left">
+<h1 class="text-white text-sm font-medium">Alex Turner</h1>
+<p class="text-gray-400 text-xs">Administrator</p>
+</div>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="flex-1 p-6 lg:p-8">
+<div class="flex flex-col gap-8">
+<!-- PageHeading -->
+<div class="flex flex-wrap justify-between items-center gap-4">
+<div class="flex flex-col gap-1">
+<p class="text-white text-3xl font-bold">User Management</p>
+<p class="text-gray-400 text-base">Manage all users, roles, and permissions on Scriptloaded.</p>
+</div>
+</div>
+<!-- Stats -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="flex flex-col gap-2 rounded-xl p-6 glass-panel">
+<p class="text-white/80 text-base font-medium">Total Users</p>
+<p class="text-white text-3xl font-bold">1,245</p>
+<p class="text-green-400 text-sm font-medium">+1.5% this month</p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 glass-panel">
+<p class="text-white/80 text-base font-medium">Active Users</p>
+<p class="text-white text-3xl font-bold">1,100</p>
+<p class="text-green-400 text-sm font-medium">+2.1% this month</p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 glass-panel border border-neon-cyan/50 shadow-glow-neon">
+<p class="text-white/80 text-base font-medium">Pending Verifications</p>
+<p class="text-white text-3xl font-bold">15</p>
+<p class="text-yellow-400 text-sm font-medium">+5 today</p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 glass-panel">
+<p class="text-white/80 text-base font-medium">Total Sellers</p>
+<p class="text-white text-3xl font-bold">350</p>
+<p class="text-green-400 text-sm font-medium">+0.8% this month</p>
+</div>
+</div>
+<!-- Main Table Panel -->
+<div class="flex flex-col gap-4 rounded-xl glass-panel p-6 shadow-soft-dark">
+<!-- ToolBar -->
+<div class="flex flex-wrap justify-between items-center gap-4">
+<div class="flex items-center gap-2">
+<label class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xl">search</span>
+<input class="form-input w-full min-w-40 max-w-64 resize-none overflow-hidden rounded-lg text-white/80 bg-black/20 focus:outline-0 focus:ring-2 focus:ring-primary h-10 placeholder:text-gray-400 pl-10 text-sm font-normal border-white/10 focus:border-primary" placeholder="Search users..." value=""/>
+</label>
+<button class="h-10 w-10 flex items-center justify-center text-white/70 bg-black/20 hover:bg-white/10 rounded-lg">
+<span class="material-symbols-outlined text-xl">filter_list</span>
+</button>
+</div>
+<button class="flex items-center justify-center rounded-lg h-10 bg-primary hover:bg-primary/90 text-white gap-2 text-sm font-bold min-w-0 px-4 shadow-glow-primary transition-all">
+<span class="material-symbols-outlined text-xl">person_add</span>
+<span>Add User</span>
+</button>
+</div>
+<!-- Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-sm text-left">
+<thead class="text-xs text-gray-400 uppercase border-b border-white/10">
+<tr>
+<th class="p-4" scope="col"><input class="form-checkbox rounded bg-black/20 border-white/20 text-primary focus:ring-primary" type="checkbox"/></th>
+<th class="px-6 py-3" scope="col">User</th>
+<th class="px-6 py-3" scope="col">Role</th>
+<th class="px-6 py-3" scope="col">Status</th>
+<th class="px-6 py-3" scope="col">Verification</th>
+<th class="px-6 py-3" scope="col">Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-b border-white/10 hover:bg-white/5">
+<td class="w-4 p-4"><input class="form-checkbox rounded bg-black/20 border-white/20 text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdVIsXxf_gw_BskqMJSh7H0UrugIdVeg6f2xCtqBSIzZex-42xHcaBEV35ppBvVY86KpPMUyIrNphjxMGpgBtPFZYrNgN3rD8Z7mCitmJRyU9SSzQXRC18F_GLoUUNYx1ZrZH7WuFctwYQMRkdrl2v5iuDVYg0y0qbu7TxMaatSjEXz-0igJ1mTO_TZ1yhW2UYUibIQObnfIoTIEuYCcP7eAyojLV34Cwqd6dzpGKedBA2hjh743yQApeuGhdhlUVwze74bK1nWhfP"/>
+<div>
+<div class="font-medium text-white">Olivia Rhye</div>
+<div class="text-gray-400 text-xs">olivia@scriptloaded.com</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-gray-300">Seller</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full text-xs font-medium bg-green-500/10 text-green-400">
+<span class="size-1.5 inline-block rounded-full bg-green-400"></span> Active
+                                            </span>
+</td>
+<td class="px-6 py-4">
+<button class="w-full text-center py-1.5 px-3 text-xs font-semibold rounded-lg bg-neon-cyan/10 text-neon-cyan hover:bg-neon-cyan/20 shadow-glow-neon">Verify Seller</button>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-gray-400">
+<button class="hover:text-white"><span class="material-symbols-outlined text-xl">visibility</span></button>
+<button class="hover:text-primary"><span class="material-symbols-outlined text-xl">edit</span></button>
+<button class="hover:text-red-500"><span class="material-symbols-outlined text-xl">delete</span></button>
+</div>
+</td>
+</tr>
+<tr class="border-b border-white/10 hover:bg-white/5">
+<td class="w-4 p-4"><input class="form-checkbox rounded bg-black/20 border-white/20 text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2_wnbNxfoisePYzvyaufvffUNZTJ680t12DpvFP3SAhsUBYeU--KKt5EwWB1FaKE-3kb4R-vGr7GZzOAjPBw9eIunORcil0ujWtrRqup_LLwF5TRRhsLXylm78zPR69H4YKvCHVJEd83tPG_6TdB09PCkCMWqg7LGJlCEJuNElRpx79eBKyJZYE9bZpCqHGS_fSOigKMSdGikiGLBGLKmPPIQKGHISpM9EpAMKBBXiz8_brQnrOj3jyCYogJXBmbWUXB61W-U2xuW"/>
+<div>
+<div class="font-medium text-white">Phoenix Baker</div>
+<div class="text-gray-400 text-xs">phoenix@scriptloaded.com</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-gray-300">Buyer</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full text-xs font-medium bg-green-500/10 text-green-400">
+<span class="size-1.5 inline-block rounded-full bg-green-400"></span> Active
+                                            </span>
+</td>
+<td class="px-6 py-4"><span class="text-gray-500">Not a seller</span></td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-gray-400">
+<button class="hover:text-white"><span class="material-symbols-outlined text-xl">visibility</span></button>
+<button class="hover:text-primary"><span class="material-symbols-outlined text-xl">edit</span></button>
+<button class="hover:text-red-500"><span class="material-symbols-outlined text-xl">delete</span></button>
+</div>
+</td>
+</tr>
+<tr class="border-b border-white/10 hover:bg-white/5">
+<td class="w-4 p-4"><input class="form-checkbox rounded bg-black/20 border-white/20 text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMCIziKAeb_ZzFNQKA8on6Mg_rfda8Oh3-JeesD116b-ABzxYj0-WwGm50PDrHXjG3UQtFwhuJ-EdpVG_cXRUoE6UVxOH8bxoeiUeI_VokhEmo3dAl9oHuuj3qqUbHdpbGYwlSQTrIPIuWrrRXsMjqA5N7C7x4G2xbkdvcEay7T1JPt7wHkHABZ0v9JkNrMwv020RBdBEkRiPzmbuAWrPDr5XKbKVo9R2QQrzwQBME_HbKu29Ew29BsTdFNl90lG0gLfLAxuZ58LTn"/>
+<div>
+<div class="font-medium text-white">Lana Steiner</div>
+<div class="text-gray-400 text-xs">lana@scriptloaded.com</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-gray-300">Seller</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full text-xs font-medium bg-red-500/10 text-red-400">
+<span class="size-1.5 inline-block rounded-full bg-red-400"></span> Inactive
+                                            </span>
+</td>
+<td class="px-6 py-4"><span class="text-green-400 font-medium">Verified</span></td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-gray-400">
+<button class="hover:text-white"><span class="material-symbols-outlined text-xl">visibility</span></button>
+<button class="hover:text-primary"><span class="material-symbols-outlined text-xl">edit</span></button>
+<button class="hover:text-red-500"><span class="material-symbols-outlined text-xl">delete</span></button>
+</div>
+</td>
+</tr>
+<tr class="border-b border-white/10 hover:bg-white/5">
+<td class="w-4 p-4"><input class="form-checkbox rounded bg-black/20 border-white/20 text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1zTNIRhInxxcAs_wLGaNpzM-ID2l43tuhzWglOD1I3JMPXO24ynaGodosAq5PX5TwyYAXaTDfYFDTJv0mA8izORL7zcSc-fEa98__Y7CybpD3O3wm5hvspBLStf_axVgfLdh-FkDcr1o8tskdnk11FAgJPvRo9jk02zfrojMQLQI0MvxWsNDsO-bNMnnKUCWjyc5jEXfLHKZWGdP8MtrVPlExYLbuz8XmluGl9Gwym6hfQHm5tSLB_UAYAZzPQo86kagD7Ixz7fpW"/>
+<div>
+<div class="font-medium text-white">John Doe</div>
+<div class="text-gray-400 text-xs">johndoe@scriptloaded.com</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-gray-300">Admin</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full text-xs font-medium bg-green-500/10 text-green-400">
+<span class="size-1.5 inline-block rounded-full bg-green-400"></span> Active
+                                            </span>
+</td>
+<td class="px-6 py-4"><span class="text-gray-500">Not a seller</span></td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-gray-400">
+<button class="hover:text-white"><span class="material-symbols-outlined text-xl">visibility</span></button>
+<button class="hover:text-primary"><span class="material-symbols-outlined text-xl">edit</span></button>
+<button class="hover:text-red-500"><span class="material-symbols-outlined text-xl">delete</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="flex flex-col sm:flex-row justify-between items-center pt-4">
+<span class="text-sm text-gray-400 mb-4 sm:mb-0">Showing 1 to 4 of 1245 results</span>
+<div class="inline-flex items-center -space-x-px text-sm">
+<a class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-400 bg-black/20 border border-white/20 rounded-s-lg hover:bg-white/10 hover:text-white" href="#">Previous</a>
+<a class="flex items-center justify-center px-3 h-8 leading-tight text-white bg-primary border border-primary hover:bg-primary/90" href="#">1</a>
+<a class="flex items-center justify-center px-3 h-8 leading-tight text-gray-400 bg-black/20 border border-white/20 hover:bg-white/10 hover:text-white" href="#">2</a>
+<a class="flex items-center justify-center px-3 h-8 leading-tight text-gray-400 bg-black/20 border border-white/20 hover:bg-white/10 hover:text-white" href="#">3</a>
+<a class="flex items-center justify-center px-3 h-8 leading-tight text-gray-400 bg-black/20 border border-white/20 rounded-e-lg hover:bg-white/10 hover:text-white" href="#">Next</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

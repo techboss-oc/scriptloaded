@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Scriptloaded - My Downloads</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+        font-size: 24px;
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1A73E8",
+              "background-light": "#F0F2F5",
+              "background-dark": "#121829",
+            },
+            fontFamily: {
+              display: ["Space Grotesk", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.5rem",
+              lg: "0.75rem",
+              xl: "1rem",
+              full: "9999px",
+            },
+            boxShadow: {
+              "neo-light-out": "6px 6px 12px #d4d6d9, -6px -6px 12px #ffffff",
+              "neo-light-in":
+                "inset 6px 6px 12px #d4d6d9, inset -6px -6px 12px #ffffff",
+              "neo-dark-out": "6px 6px 12px #0e121e, -6px -6px 12px #161e34",
+              "neo-dark-in":
+                "inset 6px 6px 12px #0e121e, inset -6px -6px 12px #161e34",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="font-display bg-background-light dark:bg-background-dark">
+    <div
+      class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden"
+    >
+      <div class="flex h-full min-h-screen w-full">
+        <!-- Sidebar Navigation -->
+        <aside class="sticky top-0 h-screen w-64 flex-shrink-0 p-4">
+          <div
+            class="flex h-full flex-col rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-lg"
+          >
+            <div class="flex items-center gap-3 px-2 pb-6">
+              <div
+                class="flex items-center justify-center rounded-lg bg-primary/20 p-2"
+              >
+                <span class="material-symbols-outlined text-primary text-2xl"
+                  >data_object</span
+                >
+              </div>
+              <h1 class="text-xl font-bold text-slate-800 dark:text-white">
+                Scriptloaded
+              </h1>
+            </div>
+            <div class="flex flex-col gap-4">
+              <div class="flex flex-col gap-2">
+                <a
+                  class="flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-black/5 dark:hover:bg-white/5"
+                  href="#"
+                >
+                  <span class="material-symbols-outlined">dashboard</span>
+                  <p class="text-sm font-medium leading-normal">Dashboard</p>
+                </a>
+                <a
+                  class="flex items-center gap-3 rounded-lg bg-primary/10 px-3 py-2 text-primary shadow-inner dark:bg-primary/20"
+                  href="#"
+                >
+                  <span class="material-symbols-outlined fill-primary"
+                    >download</span
+                  >
+                  <p class="text-sm font-medium leading-normal">Downloads</p>
+                </a>
+                <a
+                  class="flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-black/5 dark:hover:bg-white/5"
+                  href="#"
+                >
+                  <span class="material-symbols-outlined">person</span>
+                  <p class="text-sm font-medium leading-normal">Profile</p>
+                </a>
+                <a
+                  class="flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-black/5 dark:hover:bg-white/5"
+                  href="#"
+                >
+                  <span class="material-symbols-outlined">settings</span>
+                  <p class="text-sm font-medium leading-normal">Settings</p>
+                </a>
+              </div>
+            </div>
+            <div class="mt-auto flex flex-col gap-1">
+              <a
+                class="flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-black/5 dark:hover:bg-white/5"
+                href="#"
+              >
+                <span class="material-symbols-outlined">support_agent</span>
+                <p class="text-sm font-medium leading-normal">Support</p>
+              </a>
+              <div class="flex items-center gap-3 p-3">
+                <div
+                  class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+                  data-alt="User avatar of John Doe"
+                  style="
+                    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAN-qEF8xV0mPyemr1A5OkGh5HBjB3-nw95VonIUcJukphVgBUAaoMnIr2n52NIV3rlLxNwCHM24OOS7nsc1HESAh1tK1Ah4EOG6mSbuvOCAhrUplbljpIj0WTdqQxUubqvcD2hYw93kO1CU0zeJgT3Od-A9hOjCCM7Gq29YWRf0-PklhyuqGliigOr1RFSETC3fwIHzq9ouUdlBJUIJ_Sm7rYnCKNrk4PUKd-QMScyjNbhRNL2vlDIrPzV0wJqELM6XGNuDUbVxXE6');
+                  "
+                ></div>
+                <div class="flex flex-col">
+                  <h1
+                    class="text-base font-medium leading-normal text-slate-800 dark:text-white"
+                  >
+                    John Doe
+                  </h1>
+                  <p
+                    class="text-sm font-normal leading-normal text-slate-500 dark:text-slate-400"
+                  >
+                    john.doe@email.com
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+        <!-- Main Content Area -->
+        <main class="flex-1 p-8">
+          <div class="flex w-full flex-col gap-6">
+            <!-- Header and Search -->
+            <div class="flex flex-wrap items-center justify-between gap-4">
+              <h1
+                class="text-4xl font-black leading-tight tracking-tighter text-slate-900 dark:text-white"
+              >
+                My Downloads
+              </h1>
+              <div class="flex items-center gap-4">
+                <label class="flex w-72 min-w-40 flex-col">
+                  <div
+                    class="flex h-12 w-full flex-1 items-stretch rounded-lg shadow-neo-light-in dark:shadow-neo-dark-in"
+                  >
+                    <div
+                      class="flex items-center justify-center pl-4 text-slate-500 dark:text-slate-400"
+                    >
+                      <span class="material-symbols-outlined">search</span>
+                    </div>
+                    <input
+                      class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border-none bg-transparent px-2 text-base font-normal leading-normal text-slate-800 placeholder:text-slate-500 focus:outline-0 focus:ring-0 dark:text-white dark:placeholder:text-slate-400"
+                      placeholder="Search your products..."
+                      value=""
+                    />
+                  </div>
+                </label>
+                <!-- Mode Toggle Placeholder -->
+                <button
+                  class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg shadow-neo-light-out dark:shadow-neo-dark-out"
+                >
+                  <span
+                    class="material-symbols-outlined text-slate-600 dark:text-slate-300"
+                    >dark_mode</span
+                  >
+                </button>
+              </div>
+            </div>
+            <!-- Filter Chips -->
+            <div class="flex gap-3 overflow-x-auto pb-2">
+              <button
+                class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-primary px-4 text-white shadow-md"
+              >
+                <p class="text-sm font-medium leading-normal">All</p>
+              </button>
+              <button
+                class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-background-light px-4 text-slate-600 shadow-neo-light-out hover:shadow-neo-light-in dark:bg-background-dark dark:text-slate-300 dark:shadow-neo-dark-out dark:hover:shadow-neo-dark-in"
+              >
+                <p class="text-sm font-medium leading-normal">Themes</p>
+              </button>
+              <button
+                class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-background-light px-4 text-slate-600 shadow-neo-light-out hover:shadow-neo-light-in dark:bg-background-dark dark:text-slate-300 dark:shadow-neo-dark-out dark:hover:shadow-neo-dark-in"
+              >
+                <p class="text-sm font-medium leading-normal">Plugins</p>
+              </button>
+              <button
+                class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-background-light px-4 text-slate-600 shadow-neo-light-out hover:shadow-neo-light-in dark:bg-background-dark dark:text-slate-300 dark:shadow-neo-dark-out dark:hover:shadow-neo-dark-in"
+              >
+                <p class="text-sm font-medium leading-normal">UI Kits</p>
+              </button>
+              <button
+                class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-background-light px-4 text-slate-600 shadow-neo-light-out hover:shadow-neo-light-in dark:bg-background-dark dark:text-slate-300 dark:shadow-neo-dark-out dark:hover:shadow-neo-dark-in"
+              >
+                <p class="text-sm font-medium leading-normal">Scripts</p>
+              </button>
+            </div>
+            <!-- Products Table -->
+            <div
+              class="overflow-hidden rounded-xl border border-white/10 bg-white/5 backdrop-blur-lg"
+            >
+              <table class="w-full">
+                <thead>
+                  <tr
+                    class="border-b border-slate-200/50 dark:border-slate-700/50"
+                  >
+                    <th
+                      class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+                    >
+                      Product
+                    </th>
+                    <th
+                      class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+                    >
+                      Category
+                    </th>
+                    <th
+                      class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+                    >
+                      Status
+                    </th>
+                    <th
+                      class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+                    ></th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="divide-y divide-slate-200/50 dark:divide-slate-700/50"
+                >
+                  <tr>
+                    <td class="px-6 py-4">
+                      <div class="flex items-center gap-4">
+                        <div
+                          class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-12"
+                          data-alt="Product thumbnail for a modern UI Kit"
+                          style="
+                            background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBQfaXUtrUgkI8O675SiWOZdkiqGBS6xR2Ezi00CvznHf248M-KoxCT-ly5LXGqNjyQaBBp3YLFol15yPBIe77OcNmK6RVuEWPCXBHeTWVjbA7ifMen5lFuffJsfrBBuSZ6ZnVK_GgEvaI6PdHh3lL1AkZD3_V9ZoZW7COnZ0hdIAjn4zsfQZ4kTdiaPwSCo_kDdLEZism-YmIW8e18HcsIX0MDTA9seBnhDJ-bGDh9T7Xy3BYu6LvuvRiD3pFn_rNWQ-l-QNUGWf4D');
+                          "
+                        ></div>
+                        <p class="font-semibold text-slate-800 dark:text-white">
+                          Futura UI Kit
+                        </p>
+                      </div>
+                    </td>
+                    <td
+                      class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300"
+                    >
+                      UI Kit
+                    </td>
+                    <td
+                      class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300"
+                    >
+                      Ready
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                      <button
+                        class="flex h-10 items-center justify-center gap-2 rounded-lg bg-primary px-5 text-sm font-bold text-white shadow-lg shadow-primary/30 transition-shadow hover:shadow-primary/50"
+                      >
+                        <span class="material-symbols-outlined text-base"
+                          >download</span
+                        >
+                        Download
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-6 py-4">
+                      <div class="flex items-center gap-4">
+                        <div
+                          class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-12"
+                          data-alt="Product thumbnail for a WordPress theme"
+                          style="
+                            background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDDU2sZbYKe9QiSmgknF80BWo8LGONovK3qZQsPjOJFuJNisvEGe7TEdIg1R1X0FNolVd54Oakv4ipXgHtg9H0oMKoYJbRqgFCidxs-49K3NhQgImiJH1S7RzrVqX6RgOqINOOHDUuFGu5hvS0KPCihCIUxWQPL7eEee085ecWAKGqa5BnCBQ-0qP1SPlXBSXnjmn-4f_65z6wqOTvta0PwmR9fneechuqJfD09S8TICU0Gw1hnuLhTZB5N7KLRbiPDu0UH5bJ9ScEE');
+                          "
+                        ></div>
+                        <p class="font-semibold text-slate-800 dark:text-white">
+                          NeoBlock Theme
+                        </p>
+                      </div>
+                    </td>
+                    <td
+                      class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300"
+                    >
+                      WordPress Theme
+                    </td>
+                    <td
+                      class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300"
+                    >
+                      Ready
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                      <button
+                        class="flex h-10 items-center justify-center gap-2 rounded-lg bg-background-light px-5 text-sm font-bold text-primary shadow-neo-light-out hover:shadow-neo-light-in dark:bg-background-dark dark:shadow-neo-dark-out dark:hover:shadow-neo-dark-in"
+                      >
+                        <span class="material-symbols-outlined text-base"
+                          >download</span
+                        >
+                        Download
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-6 py-4">
+                      <div class="flex items-center gap-4">
+                        <div
+                          class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-12"
+                          data-alt="Product thumbnail for a website script"
+                          style="
+                            background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDlyd_g7Gfmq74txdfmcigSysWl1lOOTjz7IkSk2wuN_8kkf5g_DCFfY_Ed1XdFzSKMKqJ2FJh93NLQEXS1eMlDBeNv82kx-ZpVABRywtQl8KV1MYMjo-wFxATzN5opmbdZnbVd1A1gBKoDwnFiC_nQ-IXK6xImxjw5RUTsuuYvxFhM8krP6_0RbtIWQHvxvfcHexEdIWgiENy-vZnYhFcn1Qm98lNB-tw2DU3Zdt_ZlCO7o5KuUOEcSvgSgJ-1Qdq9TXpzhoC2OQk5');
+                          "
+                        ></div>
+                        <p class="font-semibold text-slate-800 dark:text-white">
+                          DataViz Script
+                        </p>
+                      </div>
+                    </td>
+                    <td
+                      class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300"
+                    >
+                      Website Script
+                    </td>
+                    <td
+                      class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300"
+                    >
+                      Ready
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                      <button
+                        class="flex h-10 items-center justify-center gap-2 rounded-lg bg-background-light px-5 text-sm font-bold text-primary shadow-neo-light-out hover:shadow-neo-light-in dark:bg-background-dark dark:shadow-neo-dark-out dark:hover:shadow-neo-dark-in"
+                      >
+                        <span class="material-symbols-outlined text-base"
+                          >download</span
+                        >
+                        Download
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-6 py-4">
+                      <div class="flex items-center gap-4">
+                        <div
+                          class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-12"
+                          data-alt="Product thumbnail for a mobile app source code"
+                          style="
+                            background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAlC8Aj-KjbXt0AblzMkOjkuBHr29WB-kZpxg1sH13bZtOqj_8xqdUnh7f_KN4YQSEeRQ7VEcfmX4Wy05grAQFcvlBXH6EUIHKyEKHMzenaC2wmk--sdDbzzhsn6gqzoWNtqooPWhZedkVRNaMsU3dPb90NF8-rkHPOtgPCpsO8sVEeTcG4lOJIsCtwSWFRrMaw-FQ8uN1tOQJXP_qo34kRTBVThju8L4UZA6clYuklJwDy3sVyIlrb6DsLIbWTSeDLfTo1YceBUPxW');
+                          "
+                        ></div>
+                        <p class="font-semibold text-slate-800 dark:text-white">
+                          TaskFlow App Code
+                        </p>
+                      </div>
+                    </td>
+                    <td
+                      class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300"
+                    >
+                      Mobile App
+                    </td>
+                    <td
+                      class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300"
+                    >
+                      Ready
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                      <button
+                        class="flex h-10 items-center justify-center gap-2 rounded-lg bg-background-light px-5 text-sm font-bold text-primary shadow-neo-light-out hover:shadow-neo-light-in dark:bg-background-dark dark:shadow-neo-dark-out dark:hover:shadow-neo-dark-in"
+                      >
+                        <span class="material-symbols-outlined text-base"
+                          >download</span
+                        >
+                        Download
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

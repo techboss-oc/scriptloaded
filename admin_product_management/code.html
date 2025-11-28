@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Scriptloaded - Product Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background-color: rgba(255, 255, 255, 0.05);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .dark .glass-panel {
+            background-color: rgba(36, 51, 71, 0.5); /* #243347 with opacity */
+        }
+        .light .glass-panel {
+             background-color: rgba(255, 255, 255, 0.6);
+             border-color: rgba(229, 231, 235, 0.7); /* gray-200 */
+        }
+
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#1A73E8",
+              "background-light": "#f6f7f8",
+              "background-dark": "#111822",
+            },
+            fontFamily: {
+              "display": ["Space Grotesk", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-200">
+<div class="relative flex h-auto min-h-screen w-full flex-col">
+<div class="flex h-full min-h-screen">
+<!-- SideNavBar -->
+<aside class="w-64 flex-shrink-0 p-4">
+<div class="flex h-full flex-col rounded-xl glass-panel p-4">
+<div class="flex items-center gap-3 p-3">
+<div class="size-8 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Scriptloaded</h2>
+</div>
+<div class="flex flex-col gap-4 mt-8">
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-400 dark:text-gray-300 hover:bg-primary/20 hover:text-white transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-400 dark:text-gray-300 hover:bg-primary/20 hover:text-white transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+<p class="text-sm font-medium leading-normal">Users</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/20 text-white transition-colors duration-200" href="#">
+<span class="material-symbols-outlined fill">qr_code_2</span>
+<p class="text-sm font-medium leading-normal">Products</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-400 dark:text-gray-300 hover:bg-primary/20 hover:text-white transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm font-medium leading-normal">Settings</p>
+</a>
+</div>
+</div>
+<div class="mt-auto">
+<div class="flex gap-3 items-center">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Admin user avatar with a gradient background" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCosP_8MGXFYFlZmhOcm2mg_j2Bl0-fju-ASCnMi6IyAOBk5JEYY88IWlINLSMQ27VF72oa_jjfqtCAoRHraVsgu68kFJYrofOqVd3sYxFR_YjzpPim2GEyRksdncZfTR7YisXxJ-yVo_Y0CC4n58DVeFvkwfFnidhy9Z8F51TgOHLVkSkPehFs1U5rMo1CX96_aLpGE9RUetKQApyhMxvtFli4ppod5ldCWo7p3geUdyYMwjf66VpWIELRUe9LdDO49QmBOMmdlxZO");'></div>
+<div class="flex flex-col">
+<h1 class="text-white text-base font-medium leading-normal">Admin</h1>
+<p class="text-gray-400 dark:text-gray-400 text-sm font-normal leading-normal">admin@scriptloaded.com</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col p-4">
+<!-- TopNavBar -->
+<header class="flex items-center justify-between whitespace-nowrap px-6 py-3 rounded-xl glass-panel">
+<div class="flex items-center gap-8">
+<label class="flex flex-col min-w-40 !h-10 w-80">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-gray-500 dark:text-gray-400 flex bg-transparent items-center justify-center pl-3">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-800 dark:text-white focus:outline-0 focus:ring-0 border-none bg-transparent h-full placeholder:text-gray-500 dark:placeholder:text-gray-400 pl-2 text-base font-normal leading-normal" placeholder="Search products..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-4">
+<div class="flex gap-2">
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 w-10 bg-primary/20 text-white hover:bg-primary/30 transition-colors duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 w-10 bg-primary/20 text-white hover:bg-primary/30 transition-colors duration-200">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Admin user avatar with a gradient background" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDxL5enQxD-M-XYZ5-V7-I5Xg7NaaeaVYoajqs9c8TbuPoxwcNcA3td_GRJTeKsRFZDPTzG80I1JAmurlY0mgctk-_Gs5aDqDlupDzH7upW_6V4xFFn5s1cPXtHV7ADjRpBfLZ3n_6ToAjU5SlGQhEWjhOic77QZblfF3jqBwIcjdG0EIFkB9iBGYoEGlZipZSYAzy5ayGfq3kO9M-9BctAwnBmh6p2EM_Enmwa2FvuUYyDtX0NqyDEvpxCisYgw2tnf-919lAn5-6P");'></div>
+</div>
+</header>
+<div class="flex-1 p-6">
+<!-- PageHeading -->
+<div class="flex flex-wrap justify-between gap-4 items-center mb-6">
+<div class="flex min-w-72 flex-col gap-2">
+<p class="text-gray-900 dark:text-white text-4xl font-bold leading-tight tracking-tighter">Product Management</p>
+<p class="text-gray-500 dark:text-gray-400 text-base font-normal leading-normal">Approve, reject, or edit product submissions.</p>
+</div>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors duration-200">
+<span class="truncate">Manage Categories &amp; Tags</span>
+</button>
+</div>
+<!-- Chips -->
+<div class="flex gap-3 py-3 overflow-x-auto">
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-primary/20 text-white pl-4 pr-3">
+<p class="text-sm font-medium leading-normal">All</p>
+<span class="material-symbols-outlined text-base">expand_more</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-gray-200 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 pl-4 pr-3 transition-colors duration-200">
+<p class="text-sm font-medium leading-normal">Pending</p>
+<span class="material-symbols-outlined text-base">expand_more</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-gray-200 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 pl-4 pr-3 transition-colors duration-200">
+<p class="text-sm font-medium leading-normal">Approved</p>
+<span class="material-symbols-outlined text-base">expand_more</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-gray-200 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 pl-4 pr-3 transition-colors duration-200">
+<p class="text-sm font-medium leading-normal">Rejected</p>
+<span class="material-symbols-outlined text-base">expand_more</span>
+</button>
+</div>
+<!-- Table -->
+<div class="mt-4 @container">
+<div class="overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700/50">
+<div class="overflow-x-auto">
+<table class="min-w-full">
+<thead class="bg-gray-100 dark:bg-gray-900/50">
+<tr class="text-left text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+<th class="p-4 text-center w-12"><input class="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-transparent text-primary focus:ring-primary/50" type="checkbox"/></th>
+<th class="p-4">Product</th>
+<th class="p-4">Submitter</th>
+<th class="p-4">Category</th>
+<th class="p-4">Date</th>
+<th class="p-4">Status</th>
+<th class="p-4 text-center">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-200 dark:divide-gray-800/80">
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-200">
+<td class="p-4 text-center"><input class="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-transparent text-primary focus:ring-primary/50" type="checkbox"/></td>
+<td class="p-4 whitespace-nowrap"><div class="flex items-center gap-3"><div class="bg-center bg-no-repeat aspect-square bg-cover rounded-md size-10" data-alt="Futuristic UI kit thumbnail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAaZ5sbjTG3wFkG6FskZfeTTdjazuDykd-idmnifm9BWPpBQoxYTphUyzqyOB26cwz_6y0FcnUOfhrFuQHM0_ObRPsipgBGIe3SB3e2AH0AwrGvPcVs4DvfzjBN9wV3DPyzEvBM1vip2GrYJdzeKhicUYf_f78SGIe70tVacNgyI6P8g80Wp9dT1DAo9dwIMEwX43gapRoXPXCF2ospPrmXPPRmKG0zdhF4Vn7dCCIOmmkfIHatI6AaWTrq0t5h_3RrfOt2Lp_3VWPD");'></div><div><p class="font-medium text-gray-900 dark:text-white">CyberUI Kit</p></div></div></td>
+<td class="p-4 whitespace-nowrap text-gray-600 dark:text-gray-400">Alex Morgan</td>
+<td class="p-4 whitespace-nowrap text-gray-600 dark:text-gray-400">UI Kits</td>
+<td class="p-4 whitespace-nowrap text-gray-600 dark:text-gray-400">2023-10-26</td>
+<td class="p-4 whitespace-nowrap"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-500/20 dark:text-yellow-300">Pending</span></td>
+<td class="p-4 whitespace-nowrap text-center"><div class="flex justify-center items-center gap-2"><button class="p-2 rounded-full hover:bg-green-500/20 text-green-500 transition-colors duration-200"><span class="material-symbols-outlined text-xl">check_circle</span></button><button class="p-2 rounded-full hover:bg-red-500/20 text-red-500 transition-colors duration-200"><span class="material-symbols-outlined text-xl">cancel</span></button><button class="p-2 rounded-full hover:bg-blue-500/20 text-blue-500 transition-colors duration-200"><span class="material-symbols-outlined text-xl">edit</span></button><button class="p-2 rounded-full hover:bg-gray-500/20 text-gray-500 transition-colors duration-200"><span class="material-symbols-outlined text-xl">delete</span></button></div></td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-200">
+<td class="p-4 text-center"><input class="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-transparent text-primary focus:ring-primary/50" type="checkbox"/></td>
+<td class="p-4 whitespace-nowrap"><div class="flex items-center gap-3"><div class="bg-center bg-no-repeat aspect-square bg-cover rounded-md size-10" data-alt="SEO plugin thumbnail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB8aN7ygqaI77qh-LSBFl61KWzXAeN9nICygictCYEqblw03eUVLhRah88UO7YEjnCPOFCmgSlvkRZTH531xc-FNAsiKs5e8ck_nE9t44LQuxWwA4uPDHbCPsOSzIna4V6Z_Ck1FpH0CZ9DOy04bPcJkGg1diciateV3pjFh_W6FpNAmVztmScnAa4RIyRMwTDm855uysPTiNa0vrvXULhzUdLBiGRWLMCvXJC1Sst_DVfECL4pHc3nu3Ba3M1_0mEyQnL_emjFkKUP");'></div><div><p class="font-medium text-gray-900 dark:text-white">SEO Optimizer Pro</p></div></div></td>
+<td class="p-4 whitespace-nowrap text-gray-600 dark:text-gray-400">Samantha Bee</td>
+<td class="p-4 whitespace-nowrap text-gray-600 dark:text-gray-400">Plugins</td>
+<td class="p-4 whitespace-nowrap text-gray-600 dark:text-gray-400">2023-10-25</td>
+<td class="p-4 whitespace-nowrap"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-500/20 dark:text-green-300">Approved</span></td>
+<td class="p-4 whitespace-nowrap text-center"><div class="flex justify-center items-center gap-2"><button class="p-2 rounded-full hover:bg-green-500/20 text-green-500 transition-colors duration-200"><span class="material-symbols-outlined text-xl">check_circle</span></button><button class="p-2 rounded-full hover:bg-red-500/20 text-red-500 transition-colors duration-200"><span class="material-symbols-outlined text-xl">cancel</span></button><button class="p-2 rounded-full hover:bg-blue-500/20 text-blue-500 transition-colors duration-200"><span class="material-symbols-outlined text-xl">edit</span></button><button class="p-2 rounded-full hover:bg-gray-500/20 text-gray-500 transition-colors duration-200"><span class="material-symbols-outlined text-xl">delete</span></button></div></td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-200">
+<td class="p-4 text-center"><input class="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-transparent text-primary focus:ring-primary/50" type="checkbox"/></td>
+<td class="p-4 whitespace-nowrap"><div class="flex items-center gap-3"><div class="bg-center bg-no-repeat aspect-square bg-cover rounded-md size-10" data-alt="Mobile app source code thumbnail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB2vbImopxBb5uYsv0nxOL4BFGdRGtY0zzEK5gng3OcL3UAPrnKBMP5CeE9PsnnjWHwzebTYuds4luYdT9nFQ3-d2U9ol7-Mw0f0PVyzZgVpjXj0w1lPhvo_OsdHGoLQCAw-j3kaTh_tAGRZA5jC7rFHloGUTA5fM2w3kzO-RP_Ra0CGqSY09_aOXceW-D5nOb4Vk9_G0c2iPLJt018jvEUU1bqyS6m4UhTyY15RaqTvsFKQxgu4t6TQAAqmDrN1uF7ub6zG-xOAMGO");'></div><div><p class="font-medium text-gray-900 dark:text-white">Project Phoenix</p></div></div></td>
+<td class="p-4 whitespace-nowrap text-gray-600 dark:text-gray-400">Johnathan Carl</td>
+<td class="p-4 whitespace-nowrap text-gray-600 dark:text-gray-400">Mobile App</td>
+<td class="p-4 whitespace-nowrap text-gray-600 dark:text-gray-400">2023-10-24</td>
+<td class="p-4 whitespace-nowrap"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-500/20 dark:text-red-300">Rejected</span></td>
+<td class="p-4 whitespace-nowrap text-center"><div class="flex justify-center items-center gap-2"><button class="p-2 rounded-full hover:bg-green-500/20 text-green-500 transition-colors duration-200"><span class="material-symbols-outlined text-xl">check_circle</span></button><button class="p-2 rounded-full hover:bg-red-500/20 text-red-500 transition-colors duration-200"><span class="material-symbols-outlined text-xl">cancel</span></button><button class="p-2 rounded-full hover:bg-blue-500/20 text-blue-500 transition-colors duration-200"><span class="material-symbols-outlined text-xl">edit</span></button><button class="p-2 rounded-full hover:bg-gray-500/20 text-gray-500 transition-colors duration-200"><span class="material-symbols-outlined text-xl">delete</span></button></div></td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-200">
+<td class="p-4 text-center"><input class="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-transparent text-primary focus:ring-primary/50" type="checkbox"/></td>
+<td class="p-4 whitespace-nowrap"><div class="flex items-center gap-3"><div class="bg-center bg-no-repeat aspect-square bg-cover rounded-md size-10" data-alt="Website template thumbnail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBIfGcDhRzk9jMzHjnA25sK2r3jiWE4CrpDnMRPZ_i4Nz-WzeGdbZis2y2E4qTP16Gzy_BVYx0A-f87aMfjDG32v7CY6uPxPRiSOhKaNI901MMoPlrnZzCWtmuyrjJ02MbeLyyovhJKfp8LNwbRqID2KTMR7QEp4KD2zZeAf7CWCFfO14J2BR_amJorcAxS8yqHpTwRe2OBjKUGhHAeU0OAQ6doklDfLOEGVUeyUPsg2sz58OfzElfXyYDMoNY24Mwit4FJ5yCy6s_M");'></div><div><p class="font-medium text-gray-900 dark:text-white">Neptune Admin</p></div></div></td>
+<td class="p-4 whitespace-nowrap text-gray-600 dark:text-gray-400">Carla Rodriguez</td>
+<td class="p-4 whitespace-nowrap text-gray-600 dark:text-gray-400">Templates</td>
+<td class="p-4 whitespace-nowrap text-gray-600 dark:text-gray-400">2023-10-23</td>
+<td class="p-4 whitespace-nowrap"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-500/20 dark:text-green-300">Approved</span></td>
+<td class="p-4 whitespace-nowrap text-center"><div class="flex justify-center items-center gap-2"><button class="p-2 rounded-full hover:bg-green-500/20 text-green-500 transition-colors duration-200"><span class="material-symbols-outlined text-xl">check_circle</span></button><button class="p-2 rounded-full hover:bg-red-500/20 text-red-500 transition-colors duration-200"><span class="material-symbols-outlined text-xl">cancel</span></button><button class="p-2 rounded-full hover:bg-blue-500/20 text-blue-500 transition-colors duration-200"><span class="material-symbols-outlined text-xl">edit</span></button><button class="p-2 rounded-full hover:bg-gray-500/20 text-gray-500 transition-colors duration-200"><span class="material-symbols-outlined text-xl">delete</span></button></div></td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-200">
+<td class="p-4 text-center"><input class="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-transparent text-primary focus:ring-primary/50" type="checkbox"/></td>
+<td class="p-4 whitespace-nowrap"><div class="flex items-center gap-3"><div class="bg-center bg-no-repeat aspect-square bg-cover rounded-md size-10" data-alt="Website scripts thumbnail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAt8mVS4AK8pTYu7RX5Ddrq-wXgC_eyTGN3QqB6gOfzRLemNPwzT7wSWEA1U9g2Ja3iGBignf0LAAgKvBY-315prm7aodAmgr8drXtVhG6ommVCT8iNfs6dejIAh6KCRpMPgsnKuPHTUyQgkBULziMzbuT_7KboxE9pfpeXEpHr7NSxIYhUf7i2yV7aQeF89ldRSiXXfPJgXz3-5kumA6Yc4-ebPcLJViIiN3D-h8G1t8NOr0t6QhIBkeU8taZJaVel1uIgv3lQJSVW");'></div><div><p class="font-medium text-gray-900 dark:text-white">Analytics Engine</p></div></div></td>
+<td class="p-4 whitespace-nowrap text-gray-600 dark:text-gray-400">Mike Anderson</td>
+<td class="p-4 whitespace-nowrap text-gray-600 dark:text-gray-400">Website Scripts</td>
+<td class="p-4 whitespace-nowrap text-gray-600 dark:text-gray-400">2023-10-22</td>
+<td class="p-4 whitespace-nowrap"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-500/20 dark:text-yellow-300">Pending</span></td>
+<td class="p-4 whitespace-nowrap text-center"><div class="flex justify-center items-center gap-2"><button class="p-2 rounded-full hover:bg-green-500/20 text-green-500 transition-colors duration-200"><span class="material-symbols-outlined text-xl">check_circle</span></button><button class="p-2 rounded-full hover:bg-red-500/20 text-red-500 transition-colors duration-200"><span class="material-symbols-outlined text-xl">cancel</span></button><button class="p-2 rounded-full hover:bg-blue-500/20 text-blue-500 transition-colors duration-200"><span class="material-symbols-outlined text-xl">edit</span></button><button class="p-2 rounded-full hover:bg-gray-500/20 text-gray-500 transition-colors duration-200"><span class="material-symbols-outlined text-xl">delete</span></button></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>
