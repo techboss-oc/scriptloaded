@@ -113,13 +113,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <?php require __DIR__ . '/partials/header.php'; ?>
 <?php require __DIR__ . '/partials/sidebar.php'; ?>
-<main class="flex-1 flex flex-col bg-white/40 dark:bg-slate-950/30">
+<main class="flex-1 flex flex-col bg-transparent">
   <?php require __DIR__ . '/partials/topbar.php'; ?>
   <section class="admin-content flex-1 space-y-8 overflow-y-auto px-4 py-6 sm:px-6 lg:px-10" data-admin-content>
     <div class="flex flex-wrap items-center justify-between gap-4">
       <div>
-        <h1 class="text-3xl font-bold text-slate-900 dark:text-white">Edit Product</h1>
-        <p class="text-sm text-slate-500 dark:text-slate-400">Update listings and metadata.</p>
+        <h1 class="text-3xl font-bold text-white">Edit Product</h1>
+        <p class="text-sm text-white/70">Update listings and metadata.</p>
       </div>
       <a href="<?= escape_html(site_url('admin/products.php')); ?>" class="text-sm font-semibold text-primary hover:underline">Back to products</a>
     </div>

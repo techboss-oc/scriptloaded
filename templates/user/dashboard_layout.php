@@ -11,10 +11,10 @@ $headerNotifications = $headerNotifications ?? [
   ['title' => 'Billing reminder', 'description' => 'Invoice INV-2048 was paid.', 'time' => 'Yesterday', 'icon' => 'receipt_long', 'status' => 'read'],
 ];
 $headerProfileLinks = $headerProfileLinks ?? [
-  ['label' => 'View Profile', 'href' => 'user/profile.php', 'icon' => 'person'],
-  ['label' => 'Support', 'href' => 'user/support.php', 'icon' => 'support_agent'],
+  ['label' => 'View Profile', 'href' => 'profile', 'icon' => 'person'],
+  ['label' => 'Support', 'href' => 'support', 'icon' => 'support_agent'],
 ];
-$headerLogoutHref = site_url('user/logout.php');
+$headerLogoutHref = site_url('user/logout');
 $unreadNotificationCount = (int)array_reduce($headerNotifications, static function ($carry, $notification) {
   return $carry + (!empty($notification['status']) && strtolower((string)$notification['status']) === 'unread' ? 1 : 0);
 }, 0);
@@ -144,7 +144,7 @@ $unreadNotificationCount = (int)array_reduce($headerNotifications, static functi
             <p class="text-xs text-gray-400 sidebar-meta"><?= escape_html($userProfile['email']); ?></p>
           </div>
         </div>
-        <a href="<?= escape_html(site_url('user/logout.php')); ?>" class="nav-link mt-4 flex items-center gap-3 rounded-xl border border-white/10 px-3 py-2 text-sm font-semibold text-gray-300 transition hover:border-primary/60 hover:text-white">
+        <a href="<?= escape_html(site_url('user/logout')); ?>" class="nav-link mt-4 flex items-center gap-3 rounded-xl border border-white/10 px-3 py-2 text-sm font-semibold text-gray-300 transition hover:border-primary/60 hover:text-white">
           <span class="material-symbols-outlined text-base">logout</span>
           <span class="sidebar-label">Logout</span>
         </a>
@@ -210,7 +210,7 @@ $unreadNotificationCount = (int)array_reduce($headerNotifications, static functi
                 <p class="text-xs text-gray-400">You're all caught up.</p>
               <?php endif; ?>
             </div>
-            <a href="<?= escape_html(site_url('user/support.php')); ?>" class="mt-3 inline-flex w-full items-center justify-center rounded-xl border border-white/10 px-3 py-2 text-xs font-semibold text-white transition hover:border-primary/60">View activity</a>
+            <a href="<?= escape_html(site_url('user/support')); ?>" class="mt-3 inline-flex w-full items-center justify-center rounded-xl border border-white/10 px-3 py-2 text-xs font-semibold text-white transition hover:border-primary/60">View activity</a>
           </div>
         </div>
         <div class="relative" data-dashboard-popover="profile">
@@ -273,11 +273,11 @@ $unreadNotificationCount = (int)array_reduce($headerNotifications, static functi
       <?php endforeach; ?>
     </div>
     <div class="mt-6 space-y-3 border-t border-white/10 pt-4">
-      <a href="<?= escape_html(site_url('user/profile.php')); ?>" class="flex items-center justify-between rounded-xl border border-white/15 px-4 py-3 text-sm font-semibold text-white">
+      <a href="<?= escape_html(site_url('profile')); ?>" class="flex items-center justify-between rounded-xl border border-white/15 px-4 py-3 text-sm font-semibold text-white">
         Profile
         <span class="material-symbols-outlined text-base">chevron_right</span>
       </a>
-      <a href="<?= escape_html(site_url('user/logout.php')); ?>" class="flex items-center justify-center rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white">
+      <a href="<?= escape_html(site_url('logout')); ?>" class="flex items-center justify-center rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white">
         Logout
       </a>
     </div>
@@ -391,6 +391,5 @@ $unreadNotificationCount = (int)array_reduce($headerNotifications, static functi
     });
   })();
 </script>
-<?php include __DIR__ . '/../partials/floating_social.php'; ?>
 </body>
 </html>

@@ -91,12 +91,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <?php require __DIR__ . '/partials/header.php'; ?>
 <?php require __DIR__ . '/partials/sidebar.php'; ?>
-<main class="flex-1 flex flex-col bg-white/40 dark:bg-slate-950/30">
+<main class="flex-1 flex flex-col bg-transparent">
   <?php require __DIR__ . '/partials/topbar.php'; ?>
   <section class="admin-content flex-1 space-y-8 overflow-y-auto px-4 py-6 sm:px-6 lg:px-10" data-admin-content>
     <div>
-      <h1 class="text-3xl font-bold text-slate-900 dark:text-white">Website Settings</h1>
-      <p class="text-sm text-slate-500 dark:text-slate-400">Control branding and currency behavior.</p>
+      <h1 class="text-3xl font-bold text-white">Website Settings</h1>
+      <p class="text-sm text-white/70">Control branding and currency behavior.</p>
     </div>
     <?php foreach ($notices as $notice): ?>
       <div class="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-100"><?= escape_html($notice); ?></div>
@@ -111,16 +111,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form method="post" class="space-y-6">
       <input type="hidden" name="csrf" value="<?= escape_html(generate_csrf()); ?>" />
       <section class="admin-panel rounded-2xl p-6 shadow-soft">
-        <h2 class="text-lg font-semibold text-slate-900 dark:text-white">Branding</h2>
-        <p class="text-sm text-slate-500 dark:text-slate-400">Control global brand components used across the UI.</p>
+        <h2 class="text-lg font-semibold text-white">Branding</h2>
+        <p class="text-sm text-white/70">Control global brand components used across the UI.</p>
         <label class="mt-4 block text-sm font-semibold text-slate-900 dark:text-white">
           Site Name
           <input type="text" name="site_name" value="<?= escape_html($input['site_name']); ?>" required class="mt-2 w-full rounded-xl border border-white/20 bg-transparent px-4 py-3 text-slate-900 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 dark:border-slate-700 dark:text-white" />
         </label>
       </section>
       <section class="admin-panel rounded-2xl p-6 shadow-soft">
-        <h2 class="text-lg font-semibold text-slate-900 dark:text-white">Currency Settings</h2>
-        <p class="text-sm text-slate-500 dark:text-slate-400">Align storefront pricing with manual FX overrides.</p>
+        <h2 class="text-lg font-semibold text-white">Currency Settings</h2>
+        <p class="text-sm text-white/70">Align storefront pricing with manual FX overrides.</p>
         <div class="mt-4 grid gap-4 md:grid-cols-2">
           <label class="block text-sm font-semibold text-slate-900 dark:text-white">
             Default Currency
@@ -138,18 +138,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </section>
       <section class="admin-panel rounded-2xl p-6 shadow-soft space-y-6">
         <div>
-          <h2 class="text-lg font-semibold text-slate-900 dark:text-white">Payment Methods</h2>
-          <p class="text-sm text-slate-500 dark:text-slate-400">Toggle accepted payment channels and store any gateway API keys securely. Manual payments ask buyers to upload transfer proof for approval.</p>
+          <h2 class="text-lg font-semibold text-white">Payment Methods</h2>
+          <p class="text-sm text-white/70">Toggle accepted payment channels and store any gateway API keys securely. Manual payments ask buyers to upload transfer proof for approval.</p>
         </div>
         <div class="space-y-6">
-          <div class="rounded-2xl border border-white/15 bg-white/40 p-5 dark:border-slate-800/60 dark:bg-slate-900/50">
+          <div class="rounded-2xl border border-white/20 bg-white/5 p-5">
             <div class="flex flex-wrap items-start justify-between gap-4">
               <div>
-                <p class="text-base font-semibold text-slate-900 dark:text-white">Manual Bank Transfer</p>
-                <p class="text-sm text-slate-500 dark:text-slate-400">Buyers pay via bank transfer, upload payment proof, and admins confirm manually.</p>
+                <p class="text-base font-semibold text-white">Manual Bank Transfer</p>
+                <p class="text-sm text-white/70">Buyers pay via bank transfer, upload payment proof, and admins confirm manually.</p>
               </div>
-              <label class="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white">
-                <input type="checkbox" name="payment_manual_enabled" value="1" class="h-5 w-5 rounded border-slate-400 text-primary focus:ring-primary/50" <?= $input['payment_manual_enabled'] ? 'checked' : ''; ?> />
+              <label class="inline-flex items-center gap-2 text-sm font-semibold text-white">
+                <input type="checkbox" name="payment_manual_enabled" value="1" class="h-5 w-5 rounded border-white/30 bg-transparent text-primary focus:ring-primary/50" <?= $input['payment_manual_enabled'] ? 'checked' : ''; ?> />
                 Enable
               </label>
             </div>
@@ -164,14 +164,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               </label>
             </div>
           </div>
-          <div class="rounded-2xl border border-white/15 bg-white/40 p-5 dark:border-slate-800/60 dark:bg-slate-900/50">
+          <div class="rounded-2xl border border-white/20 bg-white/5 p-5">
             <div class="flex flex-wrap items-start justify-between gap-4">
               <div>
-                <p class="text-base font-semibold text-slate-900 dark:text-white">Paystack</p>
-                <p class="text-sm text-slate-500 dark:text-slate-400">Collect card and bank payments across Africa with automated order confirmation.</p>
+                <p class="text-base font-semibold text-white">Paystack</p>
+                <p class="text-sm text-white/70">Collect card and bank payments across Africa with automated order confirmation.</p>
               </div>
-              <label class="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white">
-                <input type="checkbox" name="payment_paystack_enabled" value="1" class="h-5 w-5 rounded border-slate-400 text-primary focus:ring-primary/50" <?= $input['payment_paystack_enabled'] ? 'checked' : ''; ?> />
+              <label class="inline-flex items-center gap-2 text-sm font-semibold text-white">
+                <input type="checkbox" name="payment_paystack_enabled" value="1" class="h-5 w-5 rounded border-white/30 bg-transparent text-primary focus:ring-primary/50" <?= $input['payment_paystack_enabled'] ? 'checked' : ''; ?> />
                 Enable
               </label>
             </div>
@@ -186,14 +186,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               </label>
             </div>
           </div>
-          <div class="rounded-2xl border border-white/15 bg-white/40 p-5 dark:border-slate-800/60 dark:bg-slate-900/50">
+          <div class="rounded-2xl border border-white/20 bg-white/5 p-5">
             <div class="flex flex-wrap items-start justify-between gap-4">
               <div>
-                <p class="text-base font-semibold text-slate-900 dark:text-white">Flutterwave</p>
-                <p class="text-sm text-slate-500 dark:text-slate-400">Accept cards, mobile money, and bank transfers with instant callbacks.</p>
+                <p class="text-base font-semibold text-white">Flutterwave</p>
+                <p class="text-sm text-white/70">Accept cards, mobile money, and bank transfers with instant callbacks.</p>
               </div>
-              <label class="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white">
-                <input type="checkbox" name="payment_flutterwave_enabled" value="1" class="h-5 w-5 rounded border-slate-400 text-primary focus:ring-primary/50" <?= $input['payment_flutterwave_enabled'] ? 'checked' : ''; ?> />
+              <label class="inline-flex items-center gap-2 text-sm font-semibold text-white">
+                <input type="checkbox" name="payment_flutterwave_enabled" value="1" class="h-5 w-5 rounded border-white/30 bg-transparent text-primary focus:ring-primary/50" <?= $input['payment_flutterwave_enabled'] ? 'checked' : ''; ?> />
                 Enable
               </label>
             </div>

@@ -51,15 +51,15 @@ $tickets = fetch_all_support_tickets_with_users($pdo);
 ?>
 <?php require __DIR__ . '/partials/header.php'; ?>
 <?php require __DIR__ . '/partials/sidebar.php'; ?>
-<main class="flex-1 flex flex-col bg-white/40 dark:bg-slate-950/30">
+<main class="flex-1 flex flex-col bg-transparent">
   <?php require __DIR__ . '/partials/topbar.php'; ?>
   <section class="admin-content flex-1 space-y-8 overflow-y-auto px-4 py-6 sm:px-6 lg:px-10" data-admin-content>
     <div class="flex flex-wrap items-center justify-between gap-4">
       <div>
-        <h1 class="text-3xl font-bold text-slate-900 dark:text-white">Support Tickets</h1>
-        <p class="text-sm text-slate-500 dark:text-slate-400">Review requests from creators and keep statuses up-to-date.</p>
+        <h1 class="text-3xl font-bold text-white">Support Tickets</h1>
+        <p class="text-sm text-white/70">Review requests from creators and keep statuses up-to-date.</p>
       </div>
-      <div class="inline-flex items-center gap-2 rounded-full border border-white/30 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-slate-600 dark:text-slate-300">
+      <div class="inline-flex items-center gap-2 rounded-full border border-white/30 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white/70">
         <span class="material-symbols-outlined text-base text-primary">support_agent</span>
         Support Desk
       </div>
@@ -77,7 +77,7 @@ $tickets = fetch_all_support_tickets_with_users($pdo);
     <div class="admin-panel overflow-hidden rounded-2xl shadow-soft">
       <div class="overflow-x-auto" data-admin-table-wrapper>
         <table class="admin-table min-w-full text-left text-sm" data-admin-table>
-          <thead class="bg-white/50 text-xs uppercase text-slate-500 dark:bg-slate-900/50 dark:text-slate-400">
+          <thead class="bg-white/5 text-xs uppercase text-white/60">
             <tr>
               <th class="px-4 py-3">Ticket</th>
               <th class="px-4 py-3">Customer</th>
@@ -92,51 +92,51 @@ $tickets = fetch_all_support_tickets_with_users($pdo);
           <tbody class="divide-y divide-white/10 dark:divide-slate-800">
             <?php if (!$tickets): ?>
               <tr>
-                <td colspan="8" class="px-4 py-6 text-center text-slate-500 dark:text-slate-400">No support requests yet.</td>
+                <td colspan="8" class="px-4 py-6 text-center text-white/60">No support requests yet.</td>
               </tr>
             <?php else: ?>
               <?php foreach ($tickets as $ticket): ?>
                 <?php
                   $statusColor = match ($ticket['status']) {
                     'resolved' => 'bg-emerald-500/20 text-emerald-400',
-                    'closed' => 'bg-slate-500/20 text-slate-300',
+                    'closed' => 'bg-white/10 text-white/70',
                     'in_progress' => 'bg-amber-500/20 text-amber-400',
                     default => 'bg-indigo-500/20 text-indigo-300',
                   };
                   $priorityColor = match ($ticket['priority']) {
                     'high' => 'text-rose-400',
-                    'low' => 'text-slate-400',
+                    'low' => 'text-white/60',
                     default => 'text-amber-400',
                   };
                 ?>
-                <tr class="hover:bg-white/40 dark:hover:bg-slate-800/30">
-                  <td class="px-4 py-4 font-semibold text-slate-900 dark:text-white">#<?= (int)$ticket['id']; ?></td>
+                <tr class="hover:bg-white/5">
+                  <td class="px-4 py-4 font-semibold text-white">#<?= (int)$ticket['id']; ?></td>
                   <td class="px-4 py-4">
-                    <p class="font-medium text-slate-900 dark:text-white"><?= escape_html($ticket['full_name'] ?: $ticket['email']); ?></p>
-                    <p class="text-xs text-slate-500 dark:text-slate-400"><?= escape_html($ticket['email']); ?></p>
+                    <p class="font-medium text-white"><?= escape_html($ticket['full_name'] ?: $ticket['email']); ?></p>
+                    <p class="text-xs text-white/60"><?= escape_html($ticket['email']); ?></p>
                   </td>
-                  <td class="px-4 py-4 text-slate-700 dark:text-slate-200"><?= escape_html($ticket['subject']); ?></td>
+                  <td class="px-4 py-4 text-white/80"><?= escape_html($ticket['subject']); ?></td>
                   <td class="px-4 py-4 font-semibold <?= $priorityColor; ?>"><?= ucfirst($ticket['priority']); ?></td>
                   <td class="px-4 py-4">
                     <span class="inline-flex rounded-full px-3 py-1 text-xs font-semibold <?= $statusColor; ?>"><?= ucwords(str_replace('_', ' ', $ticket['status'])); ?></span>
                   </td>
-                  <td class="px-4 py-4 text-slate-500 dark:text-slate-400"><?= escape_html(date('M j, Y g:ia', strtotime($ticket['created_at']))); ?></td>
-                  <td class="px-4 py-4 text-slate-600 dark:text-slate-300">
+                  <td class="px-4 py-4 text-white/60"><?= escape_html(date('M j, Y g:ia', strtotime($ticket['created_at']))); ?></td>
+                  <td class="px-4 py-4 text-white/70">
                     <p class="max-h-28 overflow-y-auto whitespace-pre-line text-sm"><?= nl2br(escape_html($ticket['message'])); ?></p>
                   </td>
                   <td class="px-4 py-4">
                     <form method="post" class="space-y-2">
                       <input type="hidden" name="csrf" value="<?= escape_html(generate_csrf()); ?>" />
                       <input type="hidden" name="ticket_id" value="<?= (int)$ticket['id']; ?>" />
-                      <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400">Status
-                        <select name="status" class="mt-1 w-full rounded-xl border border-white/30 bg-transparent px-3 py-2 text-xs text-slate-900 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 dark:border-slate-700 dark:bg-slate-900/70 dark:text-white">
+                      <label class="block text-xs font-semibold text-white/70">Status
+                        <select name="status" class="mt-1 w-full rounded-xl border border-white/30 bg-transparent px-3 py-2 text-xs text-white focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 dark:border-slate-700 dark:bg-slate-900/70">
                           <?php foreach (['open','in_progress','resolved','closed'] as $statusOption): ?>
                             <option value="<?= $statusOption; ?>" <?= $statusOption === $ticket['status'] ? 'selected' : ''; ?>><?= ucwords(str_replace('_', ' ', $statusOption)); ?></option>
                           <?php endforeach; ?>
                         </select>
                       </label>
-                      <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400">Priority
-                        <select name="priority" class="mt-1 w-full rounded-xl border border-white/30 bg-transparent px-3 py-2 text-xs text-slate-900 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 dark:border-slate-700 dark:bg-slate-900/70 dark:text-white">
+                      <label class="block text-xs font-semibold text-white/70">Priority
+                        <select name="priority" class="mt-1 w-full rounded-xl border border-white/30 bg-transparent px-3 py-2 text-xs text-white focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 dark:border-slate-700 dark:bg-slate-900/70">
                           <?php foreach (['low','medium','high'] as $priorityOption): ?>
                             <option value="<?= $priorityOption; ?>" <?= $priorityOption === $ticket['priority'] ? 'selected' : ''; ?>><?= ucfirst($priorityOption); ?></option>
                           <?php endforeach; ?>

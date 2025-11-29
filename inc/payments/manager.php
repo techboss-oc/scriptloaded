@@ -52,17 +52,36 @@ function scriptloaded_demo_payment_response(string $gateway): array
     ];
 }
 
+
 function scriptloaded_process_payment(string $gateway, array $order, array $context = []): array
 {
+    // Try to pass buyer email if available (for hosted payment pages)
+    if (!isset($order['buyer_email']) && isset($_SESSION['user']['email'])) {
+        $order['buyer_email'] = $_SESSION['user']['email'];
+    }
+    $result = null;
     switch ($gateway) {
         case 'stripe':
-            return scriptloaded_process_stripe_payment($order, $context);
+            $result = scriptloaded_process_stripe_payment($order, $context);
+            break;
         case 'paystack':
-            return scriptloaded_process_paystack_payment($order, $context);
+            $result = scriptloaded_process_paystack_payment($order, $context);
+            break;
         case 'flutterwave':
-            return scriptloaded_process_flutterwave_payment($order, $context);
+            $result = scriptloaded_process_flutterwave_payment($order, $context);
+            break;
         case 'offline':
         default:
-            return scriptloaded_process_offline_payment($order, $context);
+            $result = scriptloaded_process_offline_payment($order, $context);
+            break;
     }
+    // If gateway_ref is returned, update order in DB
+    if (isset($result['gateway_ref']) && isset($order['id'])) {
+        global $pdo;
+        if (isset($pdo)) {
+            $stmt = $pdo->prepare('UPDATE orders SET gateway_ref = :ref WHERE id = :id');
+            $stmt->execute(['ref' => $result['gateway_ref'], 'id' => $order['id']]);
+        }
+    }
+    return $result;
 }

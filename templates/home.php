@@ -12,27 +12,27 @@ $homeCategories = array_slice($featuredCategories, 0, 5);
 $currentVisitor = function_exists('current_user') ? current_user() : null;
 $isLoggedIn = (bool)$currentVisitor;
 $isAdminVisitor = $isLoggedIn && !empty($currentVisitor['is_admin']);
-$dashboardHref = $isAdminVisitor ? 'admin/index.php' : 'user/dashboard.php';
+$dashboardHref = $isAdminVisitor ? 'admin/index' : 'user/dashboard';
 $authNavLabel = $isLoggedIn ? 'Dashboard' : 'Login';
 $authNavIcon = $isLoggedIn ? 'space_dashboard' : 'login';
-$authNavHref = $isLoggedIn ? $dashboardHref : 'user/login.php';
+$authNavHref = $isLoggedIn ? $dashboardHref : 'user/login';
 $primaryCtaLabel = $isLoggedIn ? 'View Dashboard' : 'Register';
-$primaryCtaHref = $isLoggedIn ? $dashboardHref : 'user/register.php';
+$primaryCtaHref = $isLoggedIn ? $dashboardHref : 'user/register';
 
 $primaryNavLinks = [
-  ['label' => 'Home', 'href' => 'index.php'],
-  ['label' => 'Marketplace', 'href' => 'listing.php'],
-  ['label' => 'Featured Product', 'href' => 'product.php?slug=ecommerce-website-script'],
-  ['label' => 'About', 'href' => 'about.php'],
-  ['label' => 'Contact', 'href' => 'contact.php'],
+  ['label' => 'Home', 'href' => 'index'],
+  ['label' => 'Marketplace', 'href' => 'listing'],
+  ['label' => 'Featured Product', 'href' => 'product?slug=ecommerce-website-script'],
+  ['label' => 'About', 'href' => 'about'],
+  ['label' => 'Contact', 'href' => 'contact'],
 ];
 
 $mobileNavLinks = [
-  ['label' => 'Home', 'href' => 'index.php', 'icon' => 'home'],
-  ['label' => 'Marketplace', 'href' => 'listing.php', 'icon' => 'storefront'],
-  ['label' => 'Featured Product', 'href' => 'product.php?slug=ecommerce-website-script', 'icon' => 'rocket_launch'],
-  ['label' => 'About', 'href' => 'about.php', 'icon' => 'info'],
-  ['label' => 'Contact', 'href' => 'contact.php', 'icon' => 'call'],
+  ['label' => 'Home', 'href' => 'index', 'icon' => 'home'],
+  ['label' => 'Marketplace', 'href' => 'listing', 'icon' => 'storefront'],
+  ['label' => 'Featured Product', 'href' => 'product?slug=ecommerce-website-script', 'icon' => 'rocket_launch'],
+  ['label' => 'About', 'href' => 'about', 'icon' => 'info'],
+  ['label' => 'Contact', 'href' => 'contact', 'icon' => 'call'],
 ];
 
 $footerLinkGroups = get_public_footer_link_groups([
@@ -121,13 +121,13 @@ $footerLinkGroups = get_public_footer_link_groups([
 <?php foreach ($featuredProducts as $product): ?>
 <?php
   $featuredSlug = (string)($product['slug'] ?? '');
-  $productUrl = $featuredSlug !== '' ? site_url('product.php?slug=' . urlencode($featuredSlug)) : site_url('listing.php');
+  $productUrl = $featuredSlug !== '' ? site_url('product?slug=' . urlencode($featuredSlug)) : site_url('listing');
   $previewUrl = !empty($product['live_preview_url']) ? $product['live_preview_url'] : $productUrl;
   $previewTarget = $previewUrl !== $productUrl ? '_blank' : '_self';
-  $checkoutPath = $featuredSlug !== '' ? 'checkout.php?slug=' . urlencode($featuredSlug) . '&currency=' . urlencode($currency) : 'listing.php';
+  $checkoutPath = $featuredSlug !== '' ? 'checkout?slug=' . urlencode($featuredSlug) . '&currency=' . urlencode($currency) : 'listing';
   $buyUrl = $isLoggedIn
     ? site_url($checkoutPath)
-    : site_url('user/login.php?redirect=' . rawurlencode($checkoutPath));
+    : site_url('user/login?redirect=' . rawurlencode($checkoutPath));
 ?>
 <div class="flex flex-col gap-3 pb-3 border border-transparent hover:border-primary/50 bg-white/5 p-4 rounded-xl transition-all hover:-translate-y-1">
 <div class="relative w-full overflow-hidden rounded-lg">
@@ -140,12 +140,20 @@ $footerLinkGroups = get_public_footer_link_groups([
 <div>
 <p class="text-white text-base font-medium leading-normal"><?= escape_html($product['title']); ?></p>
 <p class="text-gray-400 text-sm font-normal leading-normal">by <?= escape_html($product['author']); ?></p>
+<?php
+  $featuredPriceUsd = (float)($product['price_usd'] ?? 0);
+  $featuredPriceNgn = (float)($product['price_ngn'] ?? 0);
+  if ($currency === 'NGN') {
+    $featuredPrimaryPrice = '₦' . number_format($featuredPriceNgn, 0);
+    $featuredSecondaryPrice = '$' . number_format($featuredPriceUsd, 2);
+  } else {
+    $featuredPrimaryPrice = '$' . number_format($featuredPriceUsd, 2);
+    $featuredSecondaryPrice = '₦' . number_format($featuredPriceNgn, 0);
+  }
+?>
 <p class="text-white text-sm font-bold leading-normal mt-1">
-<?php if ($currency === 'NGN'): ?>
-₦<?= number_format((float) $product['price_ngn'], 0); ?>
-<?php else: ?>
-$<?= number_format((float) $product['price_usd'], 0); ?>
-<?php endif; ?>
+  <?= escape_html($featuredPrimaryPrice); ?>
+  <span class="ml-2 text-xs font-normal text-gray-400"><?= escape_html($featuredSecondaryPrice); ?></span>
 </p>
 </div>
 <div class="mt-2 flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.2em]">
@@ -169,7 +177,7 @@ $<?= number_format((float) $product['price_usd'], 0); ?>
 <p class="text-primary text-xs uppercase tracking-[0.3em]">Latest drops</p>
 <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">New from the admin desk</h2>
 </div>
-<a class="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm font-semibold text-white hover:border-primary/50 hover:text-primary" href="listing.php">
+<a class="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm font-semibold text-white hover:border-primary/50 hover:text-primary" href="listing">
 Browse all
 <span class="material-symbols-outlined text-base">arrow_outward</span>
 </a>
@@ -182,7 +190,7 @@ Browse all
 <?php else: ?>
   <?php foreach ($latestProducts as $product): ?>
     <?php $latestSlug = (string)($product['slug'] ?? '');
-    $latestHref = $latestSlug !== '' ? site_url('product.php?slug=' . urlencode($latestSlug)) : site_url('listing.php'); ?>
+    $latestHref = $latestSlug !== '' ? site_url('product?slug=' . urlencode($latestSlug)) : site_url('listing'); ?>
     <article class="flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:border-primary/40 hover:-translate-y-1">
       <div class="flex items-center gap-4">
         <img src="<?= escape_html($product['image'] ?? $product['preview_image'] ?? ''); ?>" alt="<?= escape_html($product['title']); ?> preview" class="h-20 w-20 rounded-xl object-cover"/>
@@ -220,7 +228,7 @@ Browse all
     <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">Browse by Category</h2>
     <p class="text-gray-400 text-sm">Synced with the admin catalogue so the homepage always stays current.</p>
   </div>
-  <a href="<?= escape_html(site_url('listing.php')); ?>" class="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm font-semibold text-white hover:border-primary/60">
+  <a href="<?= escape_html(site_url('listing')); ?>" class="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm font-semibold text-white hover:border-primary/60">
     View marketplace
     <span class="material-symbols-outlined text-base">arrow_outward</span>
   </a>
@@ -244,7 +252,7 @@ Browse all
       $categoriesToRender = $homeCategories;
       $highlightCategory = array_shift($categoriesToRender);
       $highlightSlug = (string)($highlightCategory['slug'] ?? '');
-      $highlightHref = $highlightSlug !== '' ? site_url('listing.php?category=' . urlencode($highlightSlug)) : site_url('listing.php');
+      $highlightHref = $highlightSlug !== '' ? site_url('listing?category=' . urlencode($highlightSlug)) : site_url('listing');
       $highlightType = $highlightCategory['type'] ?? 'Featured';
       $highlightIconKey = strtolower($highlightType);
       $highlightIcon = $categoryIconMap[$highlightIconKey] ?? 'category';
@@ -267,7 +275,7 @@ Browse all
         <?php foreach ($categoriesToRender as $index => $category): ?>
           <?php
             $categorySlug = (string)($category['slug'] ?? '');
-            $categoryHref = $categorySlug !== '' ? site_url('listing.php?category=' . urlencode($categorySlug)) : site_url('listing.php');
+            $categoryHref = $categorySlug !== '' ? site_url('listing?category=' . urlencode($categorySlug)) : site_url('listing');
             $categoryLabel = $category['label'] ?? 'Category';
             $categoryType = $category['type'] ?? 'Asset';
             $categoryDescription = $category['description'] ?? 'Discover curated assets in this lane.';
@@ -292,7 +300,7 @@ Browse all
           </a>
         <?php endforeach; ?>
         <?php if (!$categoriesToRender): ?>
-          <a href="<?= escape_html(site_url('admin/categories.php')); ?>" class="flex flex-col gap-3 rounded-2xl border border-dashed border-white/20 bg-white/5 p-5 text-center text-gray-400 hover:border-primary/40 hover:text-white">
+          <a href="<?= escape_html(site_url('admin/categories')); ?>" class="flex flex-col gap-3 rounded-2xl border border-dashed border-white/20 bg-white/5 p-5 text-center text-gray-400 hover:border-primary/40 hover:text-white">
             <span class="material-symbols-outlined text-3xl text-primary">add_circle</span>
             <p class="text-sm">Add more categories from the admin dashboard to fill this grid.</p>
           </a>

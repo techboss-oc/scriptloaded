@@ -1,4 +1,5 @@
-USE scriptloaded;
+-- seed.sql data inserts (import into existing database)
+SET FOREIGN_KEY_CHECKS=0;
 
 INSERT INTO users (email,password_hash,full_name,is_admin) VALUES
 ('admin@scriptloaded.test','$2y$10$nUr5BC0FaYfuBYvuh8.WgOXHV68hg6dFU2ytUyG/tJ1/udDSGwbte','Scriptloaded Admin',1),
@@ -11,7 +12,7 @@ INSERT INTO user_profiles (user_id,plan,avatar_url,location,website,bio) VALUES
 INSERT INTO settings(`key`,`value`) VALUES
 ('site_name','Scriptloaded'),
 ('support_email','support@scriptloaded.test'),
-('CURRENCY_RATE_USD_NGN','1500');
+('currency_rate_usd_to_ngn','1500');
 
 INSERT INTO products (title,slug,short_description,long_description,preview_image,gallery,youtube_overview,youtube_install,live_preview_url,author_name,author_avatar,price_usd,price_ngn,category,tags,description_points,features,version,changelog,file_path,rating,reviews_count,downloads_count,is_active)
 VALUES
@@ -61,3 +62,5 @@ INSERT INTO reviews (user_id,product_id,rating,comment) VALUES
 (2,1,5,'Rock solid checkout and onboarding flow.'),
 (2,2,5,'Great starting point for SaaS dashboards.'),
 (2,4,4,'Charts are beautiful and easy to configure.');
+
+SET FOREIGN_KEY_CHECKS=1;

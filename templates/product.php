@@ -48,33 +48,33 @@ if ($currency === 'USD') {
     $secondaryPrice = '$' . number_format($product['price_usd'], 2);
 }
 
-$currentProductLink = 'product.php?slug=' . urlencode($slug ?? 'ecommerce-website-script');
+$currentProductLink = 'product?slug=' . urlencode($slug ?? 'ecommerce-website-script');
 $currentVisitor = function_exists('current_user') ? current_user() : null;
 $isLoggedIn = (bool)$currentVisitor;
 $isAdminVisitor = $isLoggedIn && !empty($currentVisitor['is_admin']);
-$dashboardHref = $isAdminVisitor ? 'admin/index.php' : 'user/dashboard.php';
+$dashboardHref = $isAdminVisitor ? 'admin/index' : 'user/dashboard';
 $authNavLabel = $isLoggedIn ? 'Dashboard' : 'Login';
 $authNavIcon = $isLoggedIn ? 'space_dashboard' : 'login';
-$authNavHref = $isLoggedIn ? $dashboardHref : 'user/login.php';
+$authNavHref = $isLoggedIn ? $dashboardHref : 'user/login';
 $primaryCtaLabel = $isLoggedIn ? 'View Dashboard' : 'Register';
-$primaryCtaHref = $isLoggedIn ? $dashboardHref : 'user/register.php';
+$primaryCtaHref = $isLoggedIn ? $dashboardHref : 'user/register';
 
 $primaryNavLinks = [
-  ['label' => 'Home', 'href' => 'index.php'],
-  ['label' => 'Marketplace', 'href' => 'listing.php'],
+  ['label' => 'Home', 'href' => 'index'],
+  ['label' => 'Marketplace', 'href' => 'listing'],
   ['label' => 'Product Details', 'href' => $currentProductLink],
-  ['label' => 'About', 'href' => 'about.php'],
-  ['label' => 'Contact', 'href' => 'contact.php'],
+  ['label' => 'About', 'href' => 'about'],
+  ['label' => 'Contact', 'href' => 'contact'],
 ];
 if ($isLoggedIn) {
   $primaryNavLinks[] = ['label' => $authNavLabel, 'href' => $authNavHref];
 }
 $mobileNavLinks = [
-  ['label' => 'Home', 'href' => 'index.php', 'icon' => 'home'],
-  ['label' => 'Marketplace', 'href' => 'listing.php', 'icon' => 'storefront'],
+  ['label' => 'Home', 'href' => 'index', 'icon' => 'home'],
+  ['label' => 'Marketplace', 'href' => 'listing', 'icon' => 'storefront'],
   ['label' => 'Product Details', 'href' => $currentProductLink, 'icon' => 'inventory_2'],
-  ['label' => 'About', 'href' => 'about.php', 'icon' => 'info'],
-  ['label' => 'Contact', 'href' => 'contact.php', 'icon' => 'call'],
+  ['label' => 'About', 'href' => 'about', 'icon' => 'info'],
+  ['label' => 'Contact', 'href' => 'contact', 'icon' => 'call'],
 ];
 $footerLinkGroups = get_public_footer_link_groups([
   'isLoggedIn' => $isLoggedIn,
@@ -83,51 +83,52 @@ $footerLinkGroups = get_public_footer_link_groups([
 ]);
 
 $productSlugValue = (string)($product['slug'] ?? ($slug ?? ''));
-];
-$buyIntentPath = 'checkout.php?slug=' . $encodedProductSlug . '&currency=' . urlencode($currency);
-$favoritesTargetPath = 'user/favorites.php?add=' . $encodedProductSlug;
-$adminProductHref = isset($product['id']) ? 'admin/product_edit.php?id=' . urlencode((string)$product['id']) : 'admin/index.php';
+$encodedProductSlug = urlencode($productSlugValue);
+$buyIntentPath = 'checkout?slug=' . $encodedProductSlug . '&currency=' . urlencode($currency);
+$favoritesTargetPath = 'user/favorites?add=' . $encodedProductSlug;
+$adminProductHref = isset($product['id']) ? 'admin/product_edit?id=' . urlencode((string)$product['id']) : 'admin/index';
 if ($isAdminVisitor) {
   $buyNowHref = $adminProductHref;
   $addToCartHref = $adminProductHref;
 } else {
   $buyNowHref = $isLoggedIn
     ? $buyIntentPath
-    : 'user/login.php?redirect=' . rawurlencode($buyIntentPath);
+    : 'user/login?redirect=' . rawurlencode($buyIntentPath);
   $addToCartHref = $isLoggedIn
     ? $favoritesTargetPath
-    : 'user/login.php?redirect=' . rawurlencode($favoritesTargetPath);
+    : 'user/login?redirect=' . rawurlencode($favoritesTargetPath);
 }
-$viewProfileHref = 'user/profile.php';
+$viewProfileHref = 'user/profile';
 $detailNavLinks = [
   ['label' => 'Description', 'href' => '#description'],
   ['label' => 'Reviews', 'href' => '#reviews'],
 ];
 ?>
 <!DOCTYPE html>
-];
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script>
-];
-        colors: {
-          primary: "#1A73E8",
-          "background-light": "#f6f7f8",
-          "background-dark": "#111821",
-        },
-        fontFamily: {
-          display: ["Space Grotesk", "sans-serif"],
-        },
-        boxShadow: {
-          "neo-light": "6px 6px 12px #d8dade, -6px -6px 12px #ffffff",
-          "neo-dark": "6px 6px 12px #0c111b, -6px -6px 12px #161f2d",
-        }
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: "#1A73E8",
+        "background-light": "#f6f7f8",
+        "background-dark": "#111821",
       },
-    },
-  };
+      fontFamily: {
+        display: ["Space Grotesk", "sans-serif"],
+      },
+      boxShadow: {
+        "neo-light": "6px 6px 12px #d8dade, -6px -6px 12px #ffffff",
+        "neo-dark": "6px 6px 12px #0c111b, -6px -6px 12px #161f2d",
+      }
+    }
+  }
+};
 </script>
 <style>
 .material-symbols-outlined {
@@ -157,9 +158,9 @@ $detailNavLinks = [
   <main class="flex-1 px-4 py-10 sm:px-8 lg:px-16">
     <div class="mx-auto max-w-7xl">
       <div class="flex flex-wrap gap-2 text-sm text-gray-500 dark:text-gray-400">
-        <a class="hover:text-primary" href="<?= escape_html(site_url('index.php')); ?>">Home</a>
+        <a class="hover:text-primary" href="<?= escape_html(site_url('index')); ?>">Home</a>
         <span>/</span>
-        <a class="hover:text-primary" href="<?= escape_html(site_url('listing.php')); ?>"><?= escape_html($category); ?></a>
+        <a class="hover:text-primary" href="<?= escape_html(site_url('listing')); ?>"><?= escape_html($category); ?></a>
         <span>/</span>
         <span class="text-gray-900 dark:text-white"><?= escape_html($product['title']); ?></span>
       </div>
@@ -261,11 +262,11 @@ $detailNavLinks = [
               <p class="text-gray-500 dark:text-gray-300"><?= number_format((float)$authorReviews); ?> reviews from verified buyers</p>
             </div>
             <div class="flex flex-wrap gap-3">
-              <a class="inline-flex items-center justify-center rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-primary/30" href="<?= escape_html(site_url('user/support.php')); ?>">
+              <a class="inline-flex items-center justify-center rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-primary/30" href="<?= escape_html(site_url('user/support')); ?>">
                 Contact support
               </a>
               <?php if (!$isLoggedIn): ?>
-                <a class="inline-flex items-center justify-center rounded-xl border border-white/20 px-4 py-2 text-sm font-semibold text-gray-900 dark:text-white" href="<?= escape_html(site_url('user/login.php?redirect=' . rawurlencode('user/support.php'))); ?>">
+                <a class="inline-flex items-center justify-center rounded-xl border border-white/20 px-4 py-2 text-sm font-semibold text-gray-900 dark:text-white" href="<?= escape_html(site_url('user/login?redirect=' . rawurlencode('user/support'))); ?>">
                   Login to review
                 </a>
               <?php endif; ?>
@@ -299,7 +300,7 @@ $detailNavLinks = [
         <h2 class="mb-6 text-2xl font-bold text-gray-900 dark:text-white">Related Products</h2>
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <?php foreach ($relatedProducts as $r): ?>
-            <a href="product.php?slug=<?= urlencode($r['slug']); ?>" class="glassmorphic-panel group rounded-2xl overflow-hidden">
+            <a href="product?slug=<?= urlencode($r['slug']); ?>" class="glassmorphic-panel group rounded-2xl overflow-hidden">
               <div class="aspect-video bg-cover bg-center" style="background-image:url('<?= escape_html($r['image']); ?>')"></div>
               <div class="p-4">
                 <h3 class="font-semibold text-gray-900 transition-colors group-hover:text-primary dark:text-white"><?= escape_html($r['title']); ?></h3>

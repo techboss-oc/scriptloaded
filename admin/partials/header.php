@@ -41,24 +41,58 @@ $adminMobileUser = current_user();
   };
 </script>
 <style>
-  body {
-    background-image:
-      radial-gradient(at 25% 20%, rgba(26, 115, 232, 0.15), transparent 45%),
-      radial-gradient(at 80% 0%, rgba(255, 0, 255, 0.12), transparent 45%),
-      radial-gradient(at 80% 80%, rgba(0, 255, 255, 0.1), transparent 45%);
+  :root {
+    --admin-bg: #040914;
+    --admin-bg-soft: #060d1e;
+    --admin-surface: rgba(7, 13, 28, 0.92);
+    --admin-surface-soft: rgba(12, 19, 39, 0.75);
+    --admin-surface-highlight: rgba(20, 85, 197, 0.2);
+    --admin-border: rgba(255, 255, 255, 0.08);
+    --admin-border-strong: rgba(66, 153, 255, 0.45);
+    --admin-text: #f8fbff;
+    --admin-muted: #9cb6d9;
+    --admin-accent: #4f9bff;
+    --admin-accent-strong: #7c4dff;
+  }
+  body.admin-theme {
+    background: radial-gradient(circle at 20% 20%, rgba(79, 155, 255, 0.18), transparent 45%),
+                radial-gradient(circle at 80% 10%, rgba(124, 77, 255, 0.18), transparent 40%),
+                radial-gradient(circle at 70% 80%, rgba(18, 116, 244, 0.12), transparent 45%),
+                var(--admin-bg);
+    color: var(--admin-text);
+  }
+  body.admin-theme .text-slate-300,
+  body.admin-theme .text-slate-400,
+  body.admin-theme .text-slate-500,
+  body.admin-theme .text-slate-600,
+  body.admin-theme .dark\:text-slate-400,
+  body.admin-theme .dark\:text-slate-300,
+  body.admin-theme .text-gray-400,
+  body.admin-theme .text-gray-300 {
+    color: var(--admin-muted);
+  }
+  body.admin-theme .text-slate-700,
+  body.admin-theme .text-slate-800,
+  body.admin-theme .text-slate-900,
+  body.admin-theme .dark\:text-white,
+  body.admin-theme .text-gray-900,
+  body.admin-theme .dark\:text-gray-100 {
+    color: var(--admin-text);
+  }
+  body.admin-theme .placeholder\:text-slate-400::placeholder,
+  body.admin-theme .placeholder\:text-slate-500::placeholder,
+  body.admin-theme .placeholder\:text-slate-600::placeholder {
+    color: var(--admin-muted);
   }
   .glassmorphism {
-    background-color: rgba(30, 41, 59, 0.55);
-    backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(145deg, rgba(11, 19, 38, 0.9), rgba(5, 10, 23, 0.75));
+    backdrop-filter: blur(26px);
+    border: 1px solid var(--admin-border);
   }
   .glass-panel {
-    background-color: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-  }
-  .dark .glass-panel {
-    background-color: rgba(15, 23, 42, 0.55);
+    background: var(--admin-surface-soft);
+    border: 1px solid var(--admin-border);
+    backdrop-filter: blur(18px);
   }
   .material-symbols-outlined {
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -119,15 +153,16 @@ $adminMobileUser = current_user();
   }
   .admin-panel {
     border-radius: 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(9, 14, 24, 0.85);
-    backdrop-filter: blur(18px);
-    box-shadow: 0 25px 45px rgba(3, 6, 23, 0.45);
+    border: 1px solid var(--admin-border);
+    background: radial-gradient(circle at 15% 20%, rgba(79, 155, 255, 0.12), transparent 55%),
+                radial-gradient(circle at 90% 10%, rgba(124, 77, 255, 0.15), transparent 50%),
+                rgba(6, 12, 29, 0.95);
+    box-shadow: 0 25px 45px rgba(5, 8, 26, 0.45);
   }
-  body:not(.dark) .admin-panel {
-    background: rgba(255, 255, 255, 0.95);
-    border-color: rgba(15, 23, 42, 0.08);
-    box-shadow: 0 15px 35px rgba(15, 23, 42, 0.12);
+  html:not(.dark) .admin-panel {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(231, 238, 255, 0.95));
+    border-color: rgba(15, 23, 42, 0.12);
+    box-shadow: 0 20px 35px rgba(15, 23, 42, 0.15);
   }
   .admin-table {
     width: 100%;
@@ -161,7 +196,7 @@ $adminMobileUser = current_user();
       background: rgba(8, 13, 24, 0.92);
       box-shadow: 0 25px 45px rgba(5, 8, 20, 0.4);
     }
-    body:not(.dark) .admin-table tbody tr {
+    html:not(.dark) .admin-table tbody tr {
       background: rgba(248, 250, 255, 0.98);
       border-color: rgba(15, 23, 42, 0.08);
       box-shadow: 0 15px 30px rgba(15, 23, 42, 0.12);
@@ -186,7 +221,7 @@ $adminMobileUser = current_user();
       content: '';
       display: none;
     }
-    body:not(.dark) .admin-table tbody td::before {
+    html:not(.dark) .admin-table tbody td::before {
       color: rgba(71, 85, 105, 1);
     }
     .admin-table tbody td > *:only-child {
@@ -201,7 +236,7 @@ $adminMobileUser = current_user();
   }
 </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark font-display text-text-light-primary dark:text-dark-primary">
+<body class="admin-theme bg-background-light dark:bg-background-dark font-display text-[var(--admin-text)]">
 <div class="relative flex min-h-screen w-full flex-col">
   <div class="lg:hidden">
     <div class="fixed inset-0 z-40 bg-black/70 opacity-0 pointer-events-none transition-opacity duration-300" data-admin-mobile-menu-overlay></div>
@@ -229,7 +264,7 @@ $adminMobileUser = current_user();
           </a>
         <?php endforeach; ?>
       </div>
-      <div class="mt-6 space-y-3 border-t border-white/10 pt-4">
+      <div class="mt-4 space-y-3 border-t border-white/10 pt-4">
         <div class="flex items-center gap-3">
           <?php $mobileAvatar = $adminMobileUser['avatar'] ?? 'https://lh3.googleusercontent.com/aida-public/AB6AXuDxUTPXd_eg3vwKf982szq5jX7PfLVArFh_i-MPmUB3IEAAf4XjtXbpmwYF7KFjziiiulNfQSfO3sfqCQPIfqPtarm1ZFzEC-oi6JWDDh4QZF_t490gYBpC3oLsez6pzS01ld8kqPfXPr5wK-WM79Zr-_FZSZqZQcYcGzaSx7LWkAmajQNQYnpylqVLOAnROcQ2bwhr9GKbqwFNDxenBwfAnqXKAOir2dRxMyk-r0Is01C21zH5yc0zTf-Ce9s1_tNHglsrVAdwAvvb'; ?>
           <img class="h-11 w-11 rounded-full object-cover" src="<?= escape_html($mobileAvatar); ?>" alt="<?= escape_html($adminMobileUser['full_name'] ?? 'Admin'); ?>">
@@ -248,4 +283,4 @@ $adminMobileUser = current_user();
       </div>
     </nav>
   </div>
-  <div class="flex h-full min-h-screen w-full">
+  <div class="flex h-full min-h-screen w-full lg:gap-6">

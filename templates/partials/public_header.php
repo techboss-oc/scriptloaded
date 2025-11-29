@@ -22,6 +22,7 @@ $userDashboardHref = $userDashboardHref ?? ($isLoggedIn ? 'user/dashboard.php' :
 $userDashboardLabel = $isLoggedIn ? 'User Dashboard' : 'User Login';
 $adminDashboardHref = $adminDashboardHref ?? 'admin/index.php';
 $adminDashboardLabel = 'Admin Dashboard';
+$publicHeaderEnablePreloader = $publicHeaderEnablePreloader ?? true;
 
 if ($isLoggedIn) {
   $primaryNavLinks = array_values(array_filter($primaryNavLinks, static function ($link) {
@@ -32,6 +33,10 @@ if ($isLoggedIn) {
     $label = strtolower((string)($link['label'] ?? ''));
     return strpos($label, 'dashboard') === false;
   }));
+}
+
+if ($publicHeaderEnablePreloader) {
+  include __DIR__ . '/preloader.php';
 }
 
 ?>

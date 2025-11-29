@@ -1,0 +1,34 @@
+RewriteEngine On
+
+# Handle PHP files without extension
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.\*)$ $1.php [L]
+
+# Handle directories with index.php
+
+DirectoryIndex index.php
+
+# Security headers
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options DENY
+    Header always set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Prevent access to sensitive files
+
+<Files ".env">
+Require all denied
+</Files>
+
+<Files ".env.example">
+Require all denied
+</Files>
+
+# Prevent direct access to sensitive directories in .htaccess context
+
+RewriteRule ^logs/? - [F,L]
+RewriteRule ^tmp/? - [F,L]

@@ -6,12 +6,12 @@ require_once __DIR__ . '/store.php';
 function get_dashboard_nav_links(): array
 {
     return [
-        ['slug' => 'dashboard', 'label' => 'Dashboard', 'icon' => 'dashboard', 'href' => 'dashboard.php'],
-        ['slug' => 'purchases', 'label' => 'Purchased Items', 'icon' => 'shopping_cart', 'href' => 'purchases.php'],
-        ['slug' => 'downloads', 'label' => 'Downloads', 'icon' => 'download', 'href' => 'downloads.php'],
-        ['slug' => 'favorites', 'label' => 'Favorites', 'icon' => 'favorite', 'href' => 'favorites.php'],
-        ['slug' => 'profile', 'label' => 'Profile', 'icon' => 'person', 'href' => 'profile.php'],
-        ['slug' => 'support', 'label' => 'Support', 'icon' => 'support_agent', 'href' => 'support.php'],
+        ['slug' => 'dashboard', 'label' => 'Dashboard', 'icon' => 'dashboard', 'href' => 'dashboard'],
+        ['slug' => 'purchases', 'label' => 'Purchased Items', 'icon' => 'shopping_cart', 'href' => 'purchases'],
+        ['slug' => 'downloads', 'label' => 'Downloads', 'icon' => 'download', 'href' => 'downloads'],
+        ['slug' => 'favorites', 'label' => 'Favorites', 'icon' => 'favorite', 'href' => 'favorites'],
+        ['slug' => 'profile', 'label' => 'Profile', 'icon' => 'person', 'href' => 'profile'],
+        ['slug' => 'support', 'label' => 'Support', 'icon' => 'support_agent', 'href' => 'support'],
     ];
 }
 

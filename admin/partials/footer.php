@@ -1,4 +1,3 @@
-  <?php include dirname(__DIR__) . '/../templates/partials/floating_social.php'; ?>
   </div>
   </div>
   <script>

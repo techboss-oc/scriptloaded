@@ -119,13 +119,13 @@ $isEditing = $originalSlugValue !== '';
 ?>
 <?php require __DIR__ . '/partials/header.php'; ?>
 <?php require __DIR__ . '/partials/sidebar.php'; ?>
-<main class="flex-1 flex flex-col bg-white/40 dark:bg-slate-950/30">
+<main class="flex-1 flex flex-col bg-transparent">
   <?php require __DIR__ . '/partials/topbar.php'; ?>
   <section class="admin-content flex-1 space-y-8 overflow-y-auto px-4 py-6 sm:px-6 lg:px-10" data-admin-content>
     <div class="flex flex-wrap items-center justify-between gap-4">
       <div>
-        <h1 class="text-3xl font-bold text-slate-900 dark:text-white">Product Categories</h1>
-        <p class="text-sm text-slate-500 dark:text-slate-400">Manage the catalog groupings buyers see throughout Scriptloaded.</p>
+        <h1 class="text-3xl font-bold text-white">Product Categories</h1>
+        <p class="text-sm text-white/70">Manage the catalog groupings buyers see throughout Scriptloaded.</p>
       </div>
       <a href="<?= escape_html(site_url('admin/products.php')); ?>" class="text-sm font-semibold text-primary hover:underline">Back to products</a>
     </div>
@@ -144,17 +144,17 @@ $isEditing = $originalSlugValue !== '';
     <section class="admin-panel rounded-2xl p-6 shadow-soft">
       <div class="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h2 class="text-lg font-semibold text-slate-900 dark:text-white">Existing Categories</h2>
-          <p class="text-sm text-slate-500 dark:text-slate-400">Edit or delete categories to keep the storefront navigation tidy.</p>
+          <h2 class="text-lg font-semibold text-white">Existing Categories</h2>
+          <p class="text-sm text-white/70">Edit or delete categories to keep the storefront navigation tidy.</p>
         </div>
-        <div class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+        <div class="text-xs font-semibold uppercase tracking-wide text-white/60">
           <?= count($categories); ?> total
         </div>
       </div>
       <?php if ($categories): ?>
         <div class="mt-6 overflow-x-auto" data-admin-table-wrapper>
-          <table class="admin-table min-w-full divide-y divide-white/10 text-sm text-slate-600 dark:text-slate-200" data-admin-table>
-            <thead class="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
+          <table class="admin-table min-w-full divide-y divide-white/10 text-sm text-white/80" data-admin-table>
+            <thead class="text-xs uppercase tracking-wide text-white/60">
               <tr>
                 <th class="px-4 py-2 text-left">Category</th>
                 <th class="px-4 py-2 text-left">Type</th>
@@ -166,16 +166,16 @@ $isEditing = $originalSlugValue !== '';
               <?php foreach ($categories as $category): ?>
                 <tr class="align-top">
                   <td class="px-4 py-4">
-                    <p class="font-semibold text-slate-900 dark:text-white"><?= escape_html($category['label']); ?></p>
+                    <p class="font-semibold text-white"><?= escape_html($category['label']); ?></p>
                     <?php if (!empty($category['description'])): ?>
-                      <p class="mt-1 text-xs text-slate-500 dark:text-slate-400"><?= escape_html($category['description']); ?></p>
+                      <p class="mt-1 text-xs text-white/60"><?= escape_html($category['description']); ?></p>
                     <?php endif; ?>
                   </td>
-                  <td class="px-4 py-4 text-slate-600 dark:text-slate-300">
+                  <td class="px-4 py-4 text-white/70">
                     <?= $category['type'] ? escape_html($category['type']) : '—'; ?>
                   </td>
                   <td class="px-4 py-4">
-                    <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600 dark:bg-slate-800/80 dark:text-slate-200">
+                    <span class="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white/80">
                       <?= escape_html($category['slug']); ?>
                     </span>
                   </td>
@@ -202,7 +202,7 @@ $isEditing = $originalSlugValue !== '';
           </table>
         </div>
       <?php else: ?>
-        <div class="mt-6 rounded-2xl border border-dashed border-white/30 bg-white/40 p-6 text-sm text-slate-500 dark:border-slate-700 dark:bg-slate-900/40 dark:text-slate-400">
+        <div class="mt-6 rounded-2xl border border-dashed border-white/30 bg-white/5 p-6 text-sm text-white/70">
           No categories yet. Use the form below to create your first grouping.
         </div>
       <?php endif; ?>
@@ -211,8 +211,8 @@ $isEditing = $originalSlugValue !== '';
     <section class="admin-panel rounded-2xl p-6 shadow-soft">
       <div class="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h2 class="text-lg font-semibold text-slate-900 dark:text-white"><?= $isEditing ? 'Edit Category' : 'Add Category'; ?></h2>
-          <p class="text-sm text-slate-500 dark:text-slate-400">
+          <h2 class="text-lg font-semibold text-white"><?= $isEditing ? 'Edit Category' : 'Add Category'; ?></h2>
+          <p class="text-sm text-white/70">
             <?= $isEditing ? 'Update the selected category details.' : 'Create a new category for upcoming products.'; ?>
           </p>
         </div>

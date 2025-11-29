@@ -2,31 +2,30 @@
 $currentVisitor = function_exists('current_user') ? current_user() : null;
 $isLoggedIn = (bool) $currentVisitor;
 $isAdminVisitor = $isLoggedIn && !empty($currentVisitor['is_admin']);
-$dashboardHref = $isAdminVisitor ? 'admin/index.php' : 'user/dashboard.php';
+$dashboardHref = $isAdminVisitor ? 'admin/index' : 'user/dashboard';
 $authNavLabel = $isLoggedIn ? 'Dashboard' : 'Login';
 $authNavIcon = $isLoggedIn ? 'space_dashboard' : 'login';
-$authNavHref = $isLoggedIn ? $dashboardHref : 'user/login.php';
+$authNavHref = $isLoggedIn ? $dashboardHref : 'user/login';
 $primaryCtaLabel = $isLoggedIn ? 'View Dashboard' : 'Register';
-$primaryCtaHref = $isLoggedIn ? $dashboardHref : 'user/register.php';
+$primaryCtaHref = $isLoggedIn ? $dashboardHref : 'user/register';
 
 $primaryNavLinks = [
-  ['label' => 'Home', 'href' => 'index.php'],
-  ['label' => 'Marketplace', 'href' => 'listing.php'],
-  ['label' => 'Featured Product', 'href' => 'product.php?slug=ecommerce-website-script'],
-  ['label' => 'About', 'href' => 'about.php'],
-  ['label' => 'Contact', 'href' => 'contact.php'],
+  ['label' => 'Home', 'href' => 'index'],
+  ['label' => 'Marketplace', 'href' => 'listing'],
+  ['label' => 'Featured Product', 'href' => 'product?slug=ecommerce-website-script'],
+  ['label' => 'About', 'href' => 'about'],
+  ['label' => 'Contact', 'href' => 'contact'],
 ];
 if ($isLoggedIn) {
   $primaryNavLinks[] = ['label' => $authNavLabel, 'href' => $authNavHref];
 }
 
 $mobileNavLinks = [
-  ['label' => 'Home', 'href' => 'index.php', 'icon' => 'home'],
-  ['label' => 'Marketplace', 'href' => 'listing.php', 'icon' => 'storefront'],
-  ['label' => 'Featured', 'href' => 'product.php?slug=ecommerce-website-script', 'icon' => 'rocket_launch'],
-  ['label' => 'About', 'href' => 'about.php', 'icon' => 'info'],
-  ['label' => 'Contact', 'href' => 'contact.php', 'icon' => 'call'],
-];
+  ['label' => 'Home', 'href' => 'index', 'icon' => 'home'],
+  ['label' => 'Marketplace', 'href' => 'listing', 'icon' => 'storefront'],
+  ['label' => 'Featured', 'href' => 'product?slug=ecommerce-website-script', 'icon' => 'rocket_launch'],
+  ['label' => 'About', 'href' => 'about', 'icon' => 'info'],
+  ['label' => 'Contact', 'href' => 'contact', 'icon' => 'call'],
 ];
 
 $policyHighlights = [
@@ -36,7 +35,9 @@ $policyHighlights = [
 ];
 
 $policySections = [
-];
+  [
+    'label' => '1. Information we collect',
+    'paragraphs' => [
       'Account identity: first name, last name, username, and verified email address.',
       'Transaction and payout history for compliance and downloadable receipts.',
       'Usage telemetry (device, browser, rough location, actions) captured with privacy-first analytics for abuse detection.',
@@ -93,31 +94,19 @@ $footerLinkGroups = get_public_footer_link_groups([
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-        colors: {
-          primary: '#1A73E8',
-          'background-light': '#f6f7f8',
-          'background-dark': '#111821',
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: '#1C74E9',
+              'background-dark': '#0B111A',
+              'background-light': '#F5F7FB',
+            },
+            fontFamily: {
+              display: ['Space Grotesk', 'sans-serif'],
+            },
+          },
         },
-        fontFamily: {
-          display: ['Space Grotesk', 'sans-serif'],
-        },
-        boxShadow: {
-          'neo-light': '6px 6px 12px #d8dade, -6px -6px 12px #ffffff',
-          'neo-dark': '6px 6px 12px #0c111b, -6px -6px 12px #161f2d',
-        },
-    darkMode: 'class',
-    theme: {
-      extend: {
-        colors: {
-          primary: '#1C74E9',
-          'background-dark': '#0B111A',
-          'background-light': '#F5F7FB',
-        },
-        fontFamily: {
-          display: ['Space Grotesk', 'sans-serif'],
-        },
-      },
-    },
   };
 </script>
 </head>
@@ -169,7 +158,7 @@ $footerLinkGroups = get_public_footer_link_groups([
         <h3 class="mt-3 text-2xl font-semibold">Request a data report or deletion.</h3>
         <p class="mt-2 text-sm text-gray-200">Email privacy@scriptloaded.test or open a support ticket from your dashboard. We reply within 72 hours.</p>
         <div class="mt-6 flex flex-wrap justify-center gap-4">
-          <a class="inline-flex items-center gap-2 rounded-2xl bg-primary px-5 py-3 text-sm font-semibold text-white" href="<?= escape_html(site_url('contact.php')); ?>">
+          <a class="inline-flex items-center gap-2 rounded-2xl bg-primary px-5 py-3 text-sm font-semibold text-white" href="<?= escape_html(site_url('contact')); ?>">
             Contact support
             <span class="material-symbols-outlined text-base">arrow_outward</span>
           </a>

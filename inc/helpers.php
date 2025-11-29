@@ -466,20 +466,20 @@ function save_product_categories(array $categories): bool {
  */
 function get_public_footer_link_groups(array $options = []): array {
 	$isLoggedIn = (bool)($options['isLoggedIn'] ?? false);
-	$dashboardHref = $options['dashboardHref'] ?? ($isLoggedIn ? 'user/dashboard.php' : 'user/login.php');
+	$dashboardHref = $options['dashboardHref'] ?? ($isLoggedIn ? 'user/dashboard' : 'user/login');
 	$authNavLabel = $options['authNavLabel'] ?? ($isLoggedIn ? 'Dashboard' : 'Login');
 	if ($isLoggedIn) {
 		$accountTitle = 'Your account';
 		$accountLinks = [
 			['label' => $authNavLabel, 'href' => $dashboardHref],
-			['label' => 'Support', 'href' => 'contact.php'],
+			['label' => 'Support', 'href' => 'contact'],
 		];
 	} else {
 		$accountTitle = 'Account';
 		$accountLinks = [
-			['label' => 'Login', 'href' => 'user/login.php'],
-			['label' => 'Create Account', 'href' => 'user/register.php'],
-			['label' => 'Forgot Password', 'href' => 'user/forgot_password.php'],
+			['label' => 'Login', 'href' => 'user/login'],
+			['label' => 'Create Account', 'href' => 'user/register'],
+			['label' => 'Forgot Password', 'href' => 'user/forgot_password'],
 		];
 	}
 
@@ -487,18 +487,18 @@ function get_public_footer_link_groups(array $options = []): array {
 		[
 			'title' => 'Marketplace',
 			'links' => [
-				['label' => 'Home', 'href' => 'index.php'],
-				['label' => 'Browse Marketplace', 'href' => 'listing.php'],
-				['label' => 'Featured Product', 'href' => 'product.php?slug=ecommerce-website-script'],
+				['label' => 'Home', 'href' => 'index'],
+				['label' => 'Browse Marketplace', 'href' => 'listing'],
+				['label' => 'Featured Product', 'href' => 'product?slug=ecommerce-website-script'],
 			],
 		],
 		[
 			'title' => 'Company',
 			'links' => [
-				['label' => 'About', 'href' => 'about.php'],
-				['label' => 'Contact', 'href' => 'contact.php'],
-				['label' => 'Privacy Policy', 'href' => 'privacy.php'],
-				['label' => 'Terms & Conditions', 'href' => 'terms.php'],
+				['label' => 'About', 'href' => 'about'],
+				['label' => 'Contact', 'href' => 'contact'],
+				['label' => 'Privacy Policy', 'href' => 'privacy'],
+				['label' => 'Terms & Conditions', 'href' => 'terms'],
 			],
 		],
 		[

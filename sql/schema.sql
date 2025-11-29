@@ -1,6 +1,4 @@
 -- schema.sql
-CREATE DATABASE IF NOT EXISTS scriptloaded CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE scriptloaded;
 CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   email VARCHAR(255) UNIQUE NOT NULL,
@@ -27,13 +25,13 @@ CREATE TABLE products (
   slug VARCHAR(255) NOT NULL UNIQUE,
   short_description TEXT,
   long_description LONGTEXT,
-  preview_image VARCHAR(255),
+  preview_image TEXT,
   gallery JSON NULL,
   youtube_overview VARCHAR(255) NULL,
   youtube_install VARCHAR(255) NULL,
-  live_preview_url VARCHAR(255) NULL,
+  live_preview_url TEXT NULL,
   author_name VARCHAR(150) DEFAULT 'Scriptloaded',
-  author_avatar VARCHAR(255) NULL,
+  author_avatar TEXT NULL,
   price_usd DECIMAL(10,2) NOT NULL DEFAULT 0.00,
   price_ngn BIGINT NOT NULL DEFAULT 0,
   category VARCHAR(100) NULL,
