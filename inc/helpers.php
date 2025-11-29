@@ -258,7 +258,23 @@ function store_product_image_upload(array $file, string $prefix = 'product'): st
 		throw new RuntimeException('No file was uploaded.');
 	}
 	if ($errorCode !== UPLOAD_ERR_OK) {
-		throw new RuntimeException('Upload failed (code ' . $errorCode . ').');
+		// Provide clearer messages for common upload errors
+		switch ($errorCode) {
+			case UPLOAD_ERR_INI_SIZE:
+			case UPLOAD_ERR_FORM_SIZE:
+				$max = ini_get('upload_max_filesize') ?: 'unknown';
+				throw new RuntimeException('Upload failed: file too large (max ' . $max . ').');
+			case UPLOAD_ERR_PARTIAL:
+				throw new RuntimeException('Upload failed: file was only partially uploaded.');
+			case UPLOAD_ERR_NO_TMP_DIR:
+				throw new RuntimeException('Upload failed: temporary folder missing on server.');
+			case UPLOAD_ERR_CANT_WRITE:
+				throw new RuntimeException('Upload failed: failed to write file to disk.');
+			case UPLOAD_ERR_EXTENSION:
+				throw new RuntimeException('Upload failed: a PHP extension stopped the upload.');
+			default:
+				throw new RuntimeException('Upload failed (code ' . $errorCode . ').');
+		}
 	}
 	if (!isset($file['tmp_name']) || !is_uploaded_file($file['tmp_name'])) {
 		throw new RuntimeException('Invalid upload payload.');
@@ -267,7 +283,31 @@ function store_product_image_upload(array $file, string $prefix = 'product'): st
 	if (($file['size'] ?? 0) > $maxBytes) {
 		throw new RuntimeException('Image must be 5MB or smaller.');
 	}
-	$mime = mime_content_type($file['tmp_name']) ?: '';
+	// Determine MIME type with multiple fallbacks. Some PHP builds disable mime_content_type().
+	$mime = '';
+	if (function_exists('mime_content_type')) {
+		$mime = @mime_content_type($file['tmp_name']) ?: '';
+	}
+	if ($mime === '' && function_exists('finfo_open')) {
+		$finfo = @finfo_open(FILEINFO_MIME_TYPE);
+		if ($finfo !== false) {
+			$m = @finfo_file($finfo, $file['tmp_name']);
+			if ($m !== false) {
+				$mime = $m;
+			}
+			@finfo_close($finfo);
+		}
+	}
+	if ($mime === '') {
+		// Last resort: try getimagesize for images
+		$info = @getimagesize($file['tmp_name']);
+		if (is_array($info) && !empty($info['mime'])) {
+			$mime = $info['mime'];
+		}
+	}
+	if ($mime === '') {
+		$mime = 'application/octet-stream';
+	}
 	$allowed = [
 		'image/jpeg' => 'jpg',
 		'image/png' => 'png',
